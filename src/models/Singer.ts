@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-export interface IMusician {
+export interface ISinger {
     name: string,
     instrument: string,
     orbit_length: number,
@@ -8,7 +8,7 @@ export interface IMusician {
     biography: string,
 }
 
-const musicianSchema = new Schema<IMusician>({
+const singerSchema = new Schema<ISinger>({
     name: {
         type: Schema.Types.String,
         required: true
@@ -31,6 +31,4 @@ const musicianSchema = new Schema<IMusician>({
     }
 })
 
-const Musician = mongoose.model<IMusician>('Musician', musicianSchema)
-
-export { Musician }
+const Singer = mongoose.model<ISinger>('Singer', singerSchema)
