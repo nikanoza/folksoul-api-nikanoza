@@ -6,12 +6,6 @@
 .pnp.js
 .vscode
 
-# testing
-/coverage
-.nyc_output
-cypress/vidoes
-cypress/screenshots
-
 # production
 /build
 
