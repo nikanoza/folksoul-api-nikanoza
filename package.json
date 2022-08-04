@@ -1,0 +1,21 @@
+{
+  "name": "folksoul-api",
+  "version": "1.0.0",
+  "description": "folksoul project api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/server.js"
+  },
+  "author": "nika nozadze",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1"
+  },
+  "dependencies": {
+    "prettier": "2.7.1"
+  }
+}
