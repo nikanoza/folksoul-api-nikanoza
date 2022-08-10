@@ -32,3 +32,5 @@ const singerSchema = new Schema<ISinger>({
 })
 
 const Singer = mongoose.model<ISinger>('Singer', singerSchema)
+
+export { Singer }
