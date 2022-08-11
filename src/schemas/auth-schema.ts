@@ -1,11 +1,11 @@
 import Joi, { ValidationResult } from "joi";
-import { IUser, User } from "models/User.js";
+import { IUser, User } from "../models/User.js";
 
 const determineIfUserExists = (user: IUser | null) => (joiResult: ValidationResult) => {
     if(!user){
         return joiResult.error
     }
-    return joiResult.value
+    return user.name
 }
 
 const authSchema = async(data: IUser) => {
