@@ -12,10 +12,9 @@ const app = express()
 dotenv.config()
 connectToMongo()
 
-
 app.use(bodyParser.json())
 app.use('/api', cors(), userRouter)
-app.use('/', swaggerMiddleware)
+app.use('/', ...swaggerMiddleware)
 
 const server = http.createServer(app)
-server.listen(5000)
+server.listen(process.env.SERVER_PORT)
