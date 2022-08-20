@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken'
 
 import { IUser, User } from '../models/User.js';
 import { authSchema } from "../schemas/auth-schema.js"
-import { TypedRequestBody } from "../types/services.js"
+import { TypedRequestBody } from "../types/services.d.js"
 
-export const login = async (req: TypedRequestBody<{ name: string; password: string}>, res: express.Response) => {
+export const login = async (req: TypedRequestBody<IUser>, res: express.Response) => {
     const { body } = req
     const validator = await authSchema(body)
 

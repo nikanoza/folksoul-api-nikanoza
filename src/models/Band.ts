@@ -1,14 +1,14 @@
 import mongoose, { Schema } from "mongoose";
 
 export interface IBand {
-    logo: Buffer,
+    logo: File,
     description: string,
     extra: string,
 }
 
 const bandSchema = new Schema<IBand>({
     logo: {
-        type: Schema.Types.Mixed,
+        type: Schema.Types.Buffer,
         required: true
     },
     description: {

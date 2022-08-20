@@ -7,13 +7,16 @@ import bodyParser from 'body-parser'
 import connectToMongo from './config/mongo.js'
 import { userRouter } from './routes/user-router.js'
 import { swaggerMiddleware } from './middlewares/swagger-middleware.js'
+import { bandRouter } from './routes/band-router.js'
 
 const app = express()
 dotenv.config()
 connectToMongo()
 
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true}))
 app.use('/api', cors(), userRouter)
+app.use('/api', cors(), bandRouter)
 app.use('/', ...swaggerMiddleware)
 
 const server = http.createServer(app)
