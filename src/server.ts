@@ -1,21 +1,23 @@
 import http from 'http'
 import express from 'express'
+import cors from 'cors'
 import dotenv from 'dotenv'
-import bcrypt from 'bcrypt'
 import bodyParser from 'body-parser'
 
 import connectToMongo from './config/mongo.js'
+import { userRouter } from './routes/user-router.js'
+import { swaggerMiddleware } from './middlewares/swagger-middleware.js'
+import { bandRouter } from './routes/band-router.js'
 
 const app = express()
 dotenv.config()
 connectToMongo()
 
-
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true}))
+app.use('/api', cors(), userRouter)
+app.use('/api', cors(), bandRouter)
+app.use('/', ...swaggerMiddleware)
 
 const server = http.createServer(app)
-server.listen(process.env.SERVER_PORT, async ()=> {
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash('dardubala', salt)
-    console.log(hashedPassword)
-})
+server.listen(process.env.SERVER_PORT)

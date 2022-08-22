@@ -1,0 +1,41 @@
+openapi: 3.0.0
+info:
+  title: Folksoul- Musician Band
+  description: Folksoul API
+  version: 0.1.9
+
+servers:
+  - url: https://folksoul-api-nikanoza.nika-nozadze.redberryinternship.ge/api
+    description: production server
+  - url: http://localhost:4000/api
+    description: local server  
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /login:
+    post:
+      tags:
+        - Auth  
+      requestBody:
+        description: JWT bearer authorization
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: 'object'
+              properties:
+                  name: 
+                    type: string
+                  password: 
+                    type: string
+            example:
+              name: nika23
+              password: dardubala
+              
+      responses:
+        '200':
+          description: login successfully
