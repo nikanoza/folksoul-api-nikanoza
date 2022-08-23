@@ -5,9 +5,9 @@ info:
   version: 0.1.9
 
 servers:
-  - url: https://folksoul-api-nikanoza.nika-nozadze.redberryinternship.ge/api
+  - url: https://folksoul-api.nika-nozadze.redberryinternship.ge/api
     description: production server
-  - url: http://localhost:4000/api
+  - url: http://localhost:4444/api
     description: local server  
 components:
   securitySchemes:
