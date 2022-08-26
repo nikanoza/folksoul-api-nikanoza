@@ -1,4 +1,6 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
+
+const { Schema } = mongoose
 
 export interface ISinger {
     name: string,
@@ -6,6 +8,7 @@ export interface ISinger {
     orbit_length: number,
     color: string,
     biography: string,
+    id: number,
 }
 
 const singerSchema = new Schema<ISinger>({
@@ -27,6 +30,10 @@ const singerSchema = new Schema<ISinger>({
     },
     biography: {
         type: Schema.Types.String,
+        required: true
+    },
+    id: {
+        type: Schema.Types.Number,
         required: true
     }
 })
