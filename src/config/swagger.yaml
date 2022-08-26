@@ -39,3 +39,35 @@ paths:
       responses:
         '200':
           description: login successfully
+  /singer/new:
+    post:
+      tags:
+        - Members 
+      requestBody:
+        description: add new musician
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: 'object'
+              properties:
+                  name: 
+                    type: string
+                  instrument: 
+                    type: string
+                  orbit_length: 
+                    type: number
+                  color: 
+                    type: string
+                  biography: 
+                    type: string
+            example:
+              name: სიმპსონოვიჩი
+              instrument: გიტარა
+              orbit_length: 100
+              color: '#4257F5'
+              biography: დავიბადე 1940 წელს
+              
+      responses:
+        '200':
+          description: login successfully
