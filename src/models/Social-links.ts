@@ -1,12 +1,7 @@
 import mongoose from "mongoose";
+import { ISocialLink } from "../types/models";
 
 const { Schema } = mongoose
-
-export interface ISocialLink {
-    image: Buffer,
-    name: string,
-    link: string,
-}
 
 const socialLinkSchema = new Schema<ISocialLink>({
     image: {
@@ -23,6 +18,6 @@ const socialLinkSchema = new Schema<ISocialLink>({
     }
 })
 
-const SocialLink = mongoose.model<ISocialLink>('Singer', socialLinkSchema)
+const SocialLink = mongoose.model<ISocialLink>('SocialLink', socialLinkSchema)
 
-export { SocialLink }
+export default SocialLink 

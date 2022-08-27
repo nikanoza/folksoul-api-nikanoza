@@ -1,12 +1,7 @@
 import mongoose from "mongoose";
+import { IBand } from "../types/models";
 
 const { Schema } = mongoose
-
-export interface IBand {
-    logo: File,
-    description: string,
-    extra: string,
-}
 
 const bandSchema = new Schema<IBand>({
     logo: {
@@ -25,4 +20,4 @@ const bandSchema = new Schema<IBand>({
 
 const Band = mongoose.model<IBand>('Band', bandSchema)
 
-export { Band }
+export default Band 

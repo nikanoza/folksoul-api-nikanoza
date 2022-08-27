@@ -8,6 +8,7 @@ const options = {
 }
 
 const swaggerDocument = YAML.load('./src/config/swagger.yaml')
-export const swaggerMiddleware = [SwaggerUI.serve , SwaggerUI.setup(swaggerDocument, options)]
+export default [SwaggerUI.serve , SwaggerUI.setup(swaggerDocument, options)]
+
 
 

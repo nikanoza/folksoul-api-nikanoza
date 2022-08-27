@@ -47,4 +47,4 @@ const addNewSingerSchema = () => {
     })
 }
 
-export { addNewSingerSchema }
+export default addNewSingerSchema

@@ -33,7 +33,7 @@ paths:
                   password: 
                     type: string
             example:
-              name: nika23
+              name: nikanoza
               password: dardubala
               
       responses:
