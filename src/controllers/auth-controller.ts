@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 import { IUser, User } from '../models/User.js';
-import { authSchema } from "../schemas/auth-schema.js"
+import { authSchema } from "schemas"
 import { TypedRequestBody } from "../types/services.d.js"
 
 export const login = async (req: TypedRequestBody<IUser>, res: express.Response) => {

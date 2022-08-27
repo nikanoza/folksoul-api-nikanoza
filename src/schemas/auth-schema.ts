@@ -31,5 +31,5 @@ const authSchema = async(data: IUser) => {
     })
 }
 
-export { authSchema }
+export default authSchema 
 

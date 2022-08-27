@@ -1,7 +1,7 @@
 import express from 'express'
 import { Singer } from '../models/Singer.js'
 
-import { addNewSingerSchema } from '../schemas/add-new-singer-schema.js'
+import { addNewSingerSchema } from 'schemas'
 
 const addNewSinger = async (req: express.Request, res: express.Response) => {
     const { body } = req
@@ -15,7 +15,7 @@ const addNewSinger = async (req: express.Request, res: express.Response) => {
 
     const {name, instrument, orbit_length, color, biography} = data
 
-    const last = await Singer.find().sort({ _id: 1 }).limit(1)
+    const last = await Singer.find().sort({ _id: -1 }).limit(1)
 
     await Singer.create({
         name,
