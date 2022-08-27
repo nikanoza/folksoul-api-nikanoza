@@ -2,11 +2,12 @@ import express from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-import { IUser, User } from '../models/User.js';
-import { authSchema } from "schemas"
-import { TypedRequestBody } from "../types/services.d.js"
+import { User } from '../models/index.js';
+import { authSchema } from "../schemas/index.js"
+import { TypedRequestBody } from "../types/services"
+import { IUser } from '../types/models'
 
-export const login = async (req: TypedRequestBody<IUser>, res: express.Response) => {
+const login = async (req: TypedRequestBody<IUser>, res: express.Response) => {
     const { body } = req
     const validator = await authSchema(body)
 
@@ -35,3 +36,5 @@ export const login = async (req: TypedRequestBody<IUser>, res: express.Response)
     .status(401)
     .json({ message: 'please, provide correct credentials...' })
 }
+
+export default {login}

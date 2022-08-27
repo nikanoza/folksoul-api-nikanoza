@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
+import { IUser } from "../types/models";
 
 const { Schema } = mongoose
-
-export interface IUser {
-    name: string,
-    password: string,
-}
 
 const userSchema = new Schema<IUser>({
     name: {
@@ -20,4 +16,4 @@ const userSchema = new Schema<IUser>({
 
 const User = mongoose.model<IUser>('User', userSchema)
 
-export { User }
+export default User

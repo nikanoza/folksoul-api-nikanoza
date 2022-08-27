@@ -5,10 +5,8 @@ import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 
 import connectToMongo from './config/mongo.js'
-import { userRouter } from './routes/user-router.js'
-import { swaggerMiddleware } from './middlewares/swagger-middleware.js'
-import { bandRouter } from './routes/band-router.js'
-import { singerRouter } from './routes/singer-router.js'
+import { userRouter, bandRouter, singerRouter } from './routes/index.js'
+import { swaggerMiddleware } from './middlewares/index.js'
 
 const app = express()
 dotenv.config()

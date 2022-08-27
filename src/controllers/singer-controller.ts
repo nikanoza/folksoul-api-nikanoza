@@ -1,7 +1,7 @@
 import express from 'express'
-import { Singer } from '../models/Singer.js'
+import { Singer } from '../models/index.js'
 
-import { addNewSingerSchema } from 'schemas'
+import { addNewSingerSchema } from '../schemas/index.js'
 
 const addNewSinger = async (req: express.Request, res: express.Response) => {
     const { body } = req
@@ -29,4 +29,4 @@ const addNewSinger = async (req: express.Request, res: express.Response) => {
     return res.status(200).json({ message: 'Add new member successfully' })
 }
 
-export { addNewSinger }
+export default { addNewSinger }

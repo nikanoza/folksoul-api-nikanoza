@@ -1,15 +1,7 @@
 import mongoose from "mongoose";
+import { ISinger } from "../types/models";
 
 const { Schema } = mongoose
-
-export interface ISinger {
-    name: string,
-    instrument: string,
-    orbit_length: number,
-    color: string,
-    biography: string,
-    id: number,
-}
 
 const singerSchema = new Schema<ISinger>({
     name: {
@@ -40,4 +32,4 @@ const singerSchema = new Schema<ISinger>({
 
 const Singer = mongoose.model<ISinger>('Singer', singerSchema)
 
-export { Singer }
+export default Singer 
