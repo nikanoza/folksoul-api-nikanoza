@@ -29,4 +29,9 @@ const addNewSinger = async (req: express.Request, res: express.Response) => {
     return res.status(200).json({ message: 'Add new member successfully' })
 }
 
-export default { addNewSinger }
+const getAllSinger = async (_: express.Request, res: express.Response) => {
+    const data = await Singer.find();
+    return res.json(data);
+}
+
+export default { addNewSinger, getAllSinger }

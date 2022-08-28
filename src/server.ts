@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true}))
 app.use(cors())
 app.use('/api', cors(), userRouter)
 app.use('/api', cors(), bandRouter)
-app.use('/api/singer', cors(), singerRouter)
+app.use('/api', cors(), singerRouter)
 app.use('/', ...swaggerMiddleware)
 
 const server = http.createServer(app)

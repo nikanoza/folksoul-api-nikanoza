@@ -39,6 +39,19 @@ paths:
       responses:
         '200':
           description: login successfully
+  /singers:  
+    get:
+      tags:
+        - Members
+      responses:
+        '200':
+          description: Successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string        
   /singer/new:
     post:
       tags:
