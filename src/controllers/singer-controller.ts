@@ -1,7 +1,7 @@
 import express from 'express'
 import { Singer } from '../models/index.js'
 
-import { addNewSingerSchema } from '../schemas/index.js'
+import { addNewSingerSchema, getSingerSchema } from '../schemas/index.js'
 
 const addNewSinger = async (req: express.Request, res: express.Response) => {
     const { body } = req
@@ -34,4 +34,37 @@ const getAllSinger = async (_: express.Request, res: express.Response) => {
     return res.json(data);
 }
 
-export default { addNewSinger, getAllSinger }
+const getSinger = async(req: express.Request, res: express.Response) => {
+    const paramId = +req.params.id
+    const validator = await getSingerSchema({id: paramId})
+    const { value: data, error } = validator.validate({id: paramId})
+
+    if (error) {
+        return res.status(422).json(error.details)
+    }
+
+    const { id } = data
+    const singer = await Singer.findOne({ id })
+
+    return res.json(singer)
+}
+
+const deleteSinger = async(req: express.Request, res: express.Response) => {
+    const paramId = +req.params.id
+    const validator = await getSingerSchema({id: paramId})
+    const { value: data, error } = validator.validate({id: paramId})
+
+    if (error) {
+        return res.status(422).json(error.details)
+    }
+
+    const { id } = data
+    await Singer.findOneAndRemove({ id })
+
+    return res.status(200).send()
+}
+
+const updateSinger = async(req: express.Request, res: express.Response) => {
+    
+}
+export default { addNewSinger, getAllSinger, getSinger, deleteSinger }

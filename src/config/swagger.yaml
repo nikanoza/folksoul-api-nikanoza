@@ -51,7 +51,35 @@ paths:
               schema:
                 type: array
                 items:
-                  type: string        
+                  type: string  
+  /singers/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+      tags:
+        - Members            
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:  
+  /singers/delete/{id}:            
+    delete:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+      tags:
+        - Members      
+      responses:
+        '200':
+          description: musician removed                                
   /singer/new:
     post:
       tags:
