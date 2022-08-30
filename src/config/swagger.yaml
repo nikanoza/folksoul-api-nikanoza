@@ -98,7 +98,7 @@ paths:
               
       responses:
         '200':
-          description: login successfully
+          description: singer added
   /singers/edit/{id}:       
     put:
       parameters:
