@@ -66,20 +66,7 @@ paths:
         '200':
           content:
             application/json:
-              schema:  
-  /singers/delete/{id}:            
-    delete:
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: number
-            example: 1
-      tags:
-        - Members      
-      responses:
-        '200':
-          description: musician removed                                
+              schema:                                       
   /singer/new:
     post:
       tags:
@@ -112,3 +99,53 @@ paths:
       responses:
         '200':
           description: login successfully
+  /singers/edit/{id}:       
+    put:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+      tags:
+        - Members
+      requestBody:
+        description: update singer
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+                properties:
+                  name: 
+                    type: string
+                  instrument: 
+                    type: string
+                  orbit_length: 
+                    type: number
+                  color: 
+                    type: string
+                  biography: 
+                    type: string 
+            example:
+              name: დურუ
+              instrument: კლარნეტი
+              orbit_length: 100
+              color: '#4257F5'
+              biography: დავიბადე 1940 წელს 
+      responses:
+        '200':
+          description: Singer updated  
+  /singers/delete/{id}:            
+    delete:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+      tags:
+        - Members      
+      responses:
+        '200':
+          description: musician removed         

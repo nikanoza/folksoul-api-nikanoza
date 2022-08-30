@@ -4,10 +4,6 @@ import { ISocialLink } from "../types/models";
 const { Schema } = mongoose
 
 const socialLinkSchema = new Schema<ISocialLink>({
-    image: {
-        type: Schema.Types.Mixed,
-        required: true
-    },
     name: {
         type: Schema.Types.String,
         required: true

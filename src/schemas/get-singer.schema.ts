@@ -1,13 +1,13 @@
-import Joi, { ValidationResult } from 'joi'
+import Joi from 'joi'
 import { Singer } from '../models/index.js'
 import { ISinger } from '../types/models.js'
 
-const determineIfSingerExists = (singer: ISinger | null) => (joiResult: ValidationResult) => {
-    if(!singer){
-        return joiResult.error
+const determineIfSingerExists = (singer: ISinger | null) => (value: number, helpers: any) => {
+    if (!singer) {
+      return helpers.message('მომღერალი აღნიშნული აიდით ვერ მოიძებნა')
     }
-    return singer.id
-}
+    return value
+  }
 
 const getSingerSchema = async (data: {id: number}) => {
     const singer = await Singer.findOne({id: data.id})

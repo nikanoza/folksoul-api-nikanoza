@@ -14,7 +14,6 @@ export interface ISinger {
 }
 
 export interface ISocialLink {
-    image: Buffer,
     name: string,
     link: string,
 }
