@@ -1,6 +1,6 @@
 import Joi, { ValidationResult } from "joi";
-import { User } from "../models/index.js";
-import { IUser } from "../types/models";
+import { User } from "models";
+import { IUser } from "types";
 
 const determineIfUserExists = (user: IUser | null) => (joiResult: ValidationResult) => {
     if(!user){

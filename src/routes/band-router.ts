@@ -1,4 +1,4 @@
-import { bandController } from '../controllers/index.js'
+import { bandController } from 'controllers'
 import multer from 'multer'
 
 import express from 'express'

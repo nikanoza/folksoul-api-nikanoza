@@ -39,6 +39,34 @@ paths:
       responses:
         '200':
           description: login successfully
+  /singers:  
+    get:
+      tags:
+        - Members
+      responses:
+        '200':
+          description: Successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string  
+  /singers/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+      tags:
+        - Members            
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:                                       
   /singer/new:
     post:
       tags:
@@ -55,7 +83,7 @@ paths:
                     type: string
                   instrument: 
                     type: string
-                  orbit_length: 
+                  orbitLength: 
                     type: number
                   color: 
                     type: string
@@ -64,10 +92,60 @@ paths:
             example:
               name: სიმპსონოვიჩი
               instrument: გიტარა
-              orbit_length: 100
+              orbitLength: 100
               color: '#4257F5'
               biography: დავიბადე 1940 წელს
               
       responses:
         '200':
-          description: login successfully
+          description: singer added
+  /singers/edit/{id}:       
+    put:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+      tags:
+        - Members
+      requestBody:
+        description: update singer
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+                properties:
+                  name: 
+                    type: string
+                  instrument: 
+                    type: string
+                  orbitLength: 
+                    type: number
+                  color: 
+                    type: string
+                  biography: 
+                    type: string 
+            example:
+              name: დურუ
+              instrument: კლარნეტი
+              orbitLength: 100
+              color: '#4257F5'
+              biography: დავიბადე 1940 წელს 
+      responses:
+        '200':
+          description: Singer updated  
+  /singers/delete/{id}:            
+    delete:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+      tags:
+        - Members      
+      responses:
+        '200':
+          description: musician removed         

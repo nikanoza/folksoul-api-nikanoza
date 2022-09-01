@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IBand } from "../types/models";
+import { IBand } from "types";
 
 const { Schema } = mongoose
 

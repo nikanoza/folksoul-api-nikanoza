@@ -1,8 +1,18 @@
-import Joi from "joi";
+import Joi from 'joi'
+import { Singer } from 'models'
+import { ISinger } from 'types'
 
-const addNewSingerSchema = () => {
-    return Joi.object({
-        name: Joi.string()
+const determineIfSingerExists = (singer: ISinger | null) => (value: number, helpers: any) => {
+  if (!singer) {
+    return helpers.message('მომღერალი აღნიშნული აიდით ვერ მოიძებნა')
+  }
+  return value
+}
+
+const singerUpdateSchema = async (data: ISinger) => {
+  const singer = await Singer.findOne({ id: data.id })
+  return Joi.object({
+    name: Joi.string()
         .min(3)
         .pattern(/^[ა-ჰ]{3,}$/)
         .required()
@@ -12,7 +22,7 @@ const addNewSingerSchema = () => {
             'string.pattern': 'სახელი უნდა შეიცავდეს მხოლოდ ქართულ ასოებს',
             'string.required': 'სახელის ველი არ უნდა იყოს ცარიელი'
         }),
-        instrument: Joi.string()
+    instrument: Joi.string()
         .min(2)
         .pattern(/^[ა-ჰ]{2,}$/)
         .required()
@@ -22,13 +32,13 @@ const addNewSingerSchema = () => {
             'string.pattern': 'ინსტრუმენტი უნდა შეიცავდეს მხოლოდ ქართულ ასოებს',
             'string.required': 'ინსტრუმენტის ველი არ უნდა იყოს ცარიელი'
         }),
-        orbitLength: Joi.number()
+    orbitLength: Joi.number()
         .required()
         .messages({
             'string.base': 'ორბიტის სიგრძე უნდა იყოს რიცხვი',
             'string.required': 'ორბიტის სიგრძის ველი არ უნდა იყოს ცარიელი'
         }),
-        color: Joi.string()
+    color: Joi.string()
         .pattern(/^#[0-9A-Z]{6}$/)
         .required()
         .messages({
@@ -36,7 +46,7 @@ const addNewSingerSchema = () => {
             'string.pattern': 'ფერი უნდა იყოს hex ფორმატის',
             'string.required': 'ფერის ველი არ უნდა იყოს ცარიელი'
         }),
-        biography: Joi.string()
+    biography: Joi.string()
         .pattern(/^[ა–ჰ0-9\W]*$/)
         .required()
         .messages({
@@ -44,7 +54,15 @@ const addNewSingerSchema = () => {
             'string.pattern': 'ბიოგრაფია უნდა შეიჩავდეს მხოლოდ ქართულ ასოებს',
             'string.required': 'ბიოგრაფია არ უნდა იყოს ცარიელი'
         }),
-    })
+    id: Joi.number()
+      .custom(determineIfSingerExists(singer))
+      .required()
+      .messages({
+        'number.base': 'id field should be number.',
+        'number.custom': 'singer not found',
+        'any.required': 'id field is required.',
+      }),
+  })
 }
 
-export default addNewSingerSchema
+export default singerUpdateSchema

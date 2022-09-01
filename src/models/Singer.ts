@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { ISinger } from "../types/models";
+import { ISinger } from "types";
 
 const { Schema } = mongoose
 
@@ -12,7 +12,7 @@ const singerSchema = new Schema<ISinger>({
         type: Schema.Types.String,
         required: true
     },
-    orbit_length: {
+    orbitLength: {
         type: Schema.Types.Number,
         required: true
     },
