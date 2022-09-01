@@ -2,12 +2,11 @@ import express from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-import { User } from '../models/index.js';
-import { authSchema } from "../schemas/index.js"
-import { TypedRequestBody } from "../types/services"
-import { IUser } from '../types/models'
+import { User } from 'models';
+import { authSchema } from "schemas"
+import { IUser } from "types"
 
-const login = async (req: TypedRequestBody<IUser>, res: express.Response) => {
+const login = async (req: express.Request, res: express.Response) => {
     const { body } = req
     const validator = await authSchema(body)
 

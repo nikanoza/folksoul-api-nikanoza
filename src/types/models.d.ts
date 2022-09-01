@@ -7,7 +7,7 @@ export interface IBand {
 export interface ISinger {
     name: string,
     instrument: string,
-    orbit_length: number,
+    orbitLength: number,
     color: string,
     biography: string,
     id: number,

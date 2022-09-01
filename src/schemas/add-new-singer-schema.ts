@@ -22,7 +22,7 @@ const addNewSingerSchema = () => {
             'string.pattern': 'ინსტრუმენტი უნდა შეიცავდეს მხოლოდ ქართულ ასოებს',
             'string.required': 'ინსტრუმენტის ველი არ უნდა იყოს ცარიელი'
         }),
-        orbit_length: Joi.number()
+        orbitLength: Joi.number()
         .required()
         .messages({
             'string.base': 'ორბიტის სიგრძე უნდა იყოს რიცხვი',

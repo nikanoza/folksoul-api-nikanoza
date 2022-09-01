@@ -1,7 +1,7 @@
 import express from 'express'
 import { Singer } from '../models/index.js'
 
-import { addNewSingerSchema, getSingerSchema, singerUpdateSchema } from '../schemas/index.js'
+import { addNewSingerSchema, getSingerSchema, singerUpdateSchema } from 'schemas'
 
 const addNewSinger = async (req: express.Request, res: express.Response) => {
     const { body } = req
@@ -13,14 +13,14 @@ const addNewSinger = async (req: express.Request, res: express.Response) => {
         return res.status(422).json(error.details)
     }
 
-    const {name, instrument, orbit_length, color, biography} = data
+    const {name, instrument, orbitLength, color, biography} = data
 
     const last = await Singer.find().sort({ _id: -1 }).limit(1)
 
     await Singer.create({
         name,
         instrument,
-        orbit_length,
+        orbitLength,
         color,
         biography,
         id: last.length ? last[0].id + 1 : 1,
@@ -74,14 +74,14 @@ const updateSinger = async(req: express.Request, res: express.Response) => {
         return res.status(422).json(error.details)
     }
 
-    const {name, instrument, orbit_length, color, biography, id } = data
+    const {name, instrument, orbitLength, color, biography, id } = data
 
     await Singer.findOneAndUpdate(
         { id },
         { 
             name,
             instrument,
-            orbit_length,
+            orbitLength,
             color,
             biography,
         }

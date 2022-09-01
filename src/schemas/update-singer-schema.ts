@@ -1,6 +1,6 @@
 import Joi from 'joi'
-import { Singer } from '../models/index.js'
-import { ISinger } from '../types/models.js'
+import { Singer } from 'models'
+import { ISinger } from 'types'
 
 const determineIfSingerExists = (singer: ISinger | null) => (value: number, helpers: any) => {
   if (!singer) {
@@ -32,7 +32,7 @@ const singerUpdateSchema = async (data: ISinger) => {
             'string.pattern': 'ინსტრუმენტი უნდა შეიცავდეს მხოლოდ ქართულ ასოებს',
             'string.required': 'ინსტრუმენტის ველი არ უნდა იყოს ცარიელი'
         }),
-    orbit_length: Joi.number()
+    orbitLength: Joi.number()
         .required()
         .messages({
             'string.base': 'ორბიტის სიგრძე უნდა იყოს რიცხვი',

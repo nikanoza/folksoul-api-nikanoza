@@ -1,5 +1,5 @@
 import express from 'express'
-import { singerController } from '../controllers/index.js'
+import { singerController } from 'controllers'
 
 const singerRouter = express.Router()
 const { addNewSinger, getAllSinger, getSinger, deleteSinger, updateSinger } = singerController
