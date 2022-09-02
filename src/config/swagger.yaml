@@ -7,7 +7,7 @@ info:
 servers:
   - url: https://folksoul-api.nika-nozadze.redberryinternship.ge/api
     description: production server
-  - url: http://localhost:4444/api
+  - url: http://localhost:5555/api
     description: local server  
 components:
   securitySchemes:
@@ -60,13 +60,16 @@ paths:
           schema:
             type: number
             example: 1
+          required: true
       tags:
         - Members            
       responses:
         '200':
+          description: singer added
           content:
             application/json:
-              schema:                                       
+              schema:
+                type: "object"
   /singer/new:
     post:
       tags:
@@ -94,8 +97,7 @@ paths:
               instrument: გიტარა
               orbitLength: 100
               color: '#4257F5'
-              biography: დავიბადე 1940 წელს
-              
+              biography: დავიბადე 1940 წელს       
       responses:
         '200':
           description: singer added
@@ -107,6 +109,7 @@ paths:
           schema:
             type: number
             example: 1
+          required: true
       tags:
         - Members
       requestBody:
@@ -115,8 +118,8 @@ paths:
         content:
           application/json:
             schema: 
-              type: object
-                properties:
+              type: "object"
+              properties:
                   name: 
                     type: string
                   instrument: 
@@ -144,6 +147,7 @@ paths:
           schema:
             type: number
             example: 1
+          required: true
       tags:
         - Members      
       responses:

@@ -1,7 +1,7 @@
 import express from 'express'
-import { Singer } from '../models/index.js'
+import { Singer } from 'models'
 
-import { addNewSingerSchema, getSingerSchema, singerUpdateSchema } from 'schemas'
+import { addNewSingerSchema, getSingerSchema, singerUpdateSchema } from '../schemas/index.js'
 
 const addNewSinger = async (req: express.Request, res: express.Response) => {
     const { body } = req
