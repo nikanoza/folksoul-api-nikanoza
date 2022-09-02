@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 
 import connectToMongo from './config/mongo.js'
-import { userRouter, bandRouter, singerRouter } from 'routes'
+import { userRouter, bandRouter, singerRouter, linksRouter } from 'routes'
 import { swaggerMiddleware } from 'middlewares'
 
 const app = express()
@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true}))
 app.use('/api', cors(), userRouter)
 app.use('/api', cors(), bandRouter)
 app.use('/api', cors(), singerRouter)
+app.use('/api', cors(), linksRouter)
 app.use('/', ...swaggerMiddleware)
 
 const server = http.createServer(app)
