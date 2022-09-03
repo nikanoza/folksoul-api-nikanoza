@@ -152,4 +152,26 @@ paths:
         - Members      
       responses:
         '200':
-          description: musician removed         
+          description: musician removed  
+  /links/new:
+    post:
+      tags:
+        - Social-links 
+      requestBody:
+        description: add new link
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: 'object'
+              properties:
+                  name: 
+                    type: string
+                  link: 
+                    type: string
+            example:
+              name: F1
+              link: https://www.formula1.com
+      responses:
+        '200':
+          description: new social link added               

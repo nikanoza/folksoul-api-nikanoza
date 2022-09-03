@@ -6,9 +6,6 @@
     "paths": {
       "*": ["src/*"],                          /* Specify a set of entries that re-map imports to additional lookup locations. */
     },
-    "alias": {
-      "*": "./*"
-    },
     "moduleResolution": "Node",          
     "outDir": "./build",                      /* Specify an output folder for all emitted files. */
     "removeComments": true,                   /* Disable emitting comments. */
