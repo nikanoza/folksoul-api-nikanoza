@@ -61,7 +61,7 @@ const updateSocialLink = async(req: express.Request, res: express.Response) => {
 }
 
 const deleteSocialLink = async(req: express.Request, res: express.Response) => {
-    const paramId = + req.params.id
+    const paramId = +req.params.id
 
     const validator = await getLinkSchema({id: paramId})
     const {value: data, error} = validator.validate({id: paramId})
@@ -73,7 +73,7 @@ const deleteSocialLink = async(req: express.Request, res: express.Response) => {
     const { id } = data
     await SocialLink.findOneAndRemove({ id })
 
-    return res.status(200).send()
+    return res.status(200).send({ message: 'social link removed successfully' })
 }
 
 export default { addNewLink, getSocialLink, updateSocialLink, deleteSocialLink }

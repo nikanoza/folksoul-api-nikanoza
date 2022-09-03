@@ -61,7 +61,7 @@ const deleteSinger = async(req: express.Request, res: express.Response) => {
     const { id } = data
     await Singer.findOneAndRemove({ id })
 
-    return res.status(200).send()
+    return res.status(200).send({ message: 'member removed successfully' })
 }
 
 const updateSinger = async(req: express.Request, res: express.Response) => {
@@ -87,6 +87,6 @@ const updateSinger = async(req: express.Request, res: express.Response) => {
         }
     )
 
-    return res.status(200).send()
+    return res.status(200).send({ message: 'singer info updated successfully' })
 }
 export default { addNewSinger, getAllSinger, getSinger, deleteSinger, updateSinger }
