@@ -192,4 +192,33 @@ paths:
           content:
             application/json:
               schema:
-                type: "object"                     
+                type: "object"    
+  /links/edit/{id}:       
+    put:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+          required: true
+      tags:
+        - Social-links
+      requestBody:
+        description: update social link
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: "object"
+              properties:
+                  name: 
+                    type: string
+                  link:
+                    type: string
+            example:
+              name: f1
+              link: https://www.formula1.com
+      responses:
+        '200':
+          description: social link updated                   
