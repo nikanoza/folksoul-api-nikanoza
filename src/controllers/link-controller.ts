@@ -76,4 +76,10 @@ const deleteSocialLink = async(req: express.Request, res: express.Response) => {
     return res.status(200).send({ message: 'social link removed successfully' })
 }
 
-export default { addNewLink, getSocialLink, updateSocialLink, deleteSocialLink }
+const getAllSocialLinks = async(_: express.Request, res: express.Response) => {
+    const data = await SocialLink.find()
+
+    return res.status(200).json(data)
+}
+
+export default { addNewLink, getSocialLink, updateSocialLink, deleteSocialLink, getAllSocialLinks }

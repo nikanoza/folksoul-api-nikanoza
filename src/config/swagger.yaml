@@ -235,4 +235,17 @@ paths:
         - Social-links      
       responses:
         '200':
-          description: social link removed                       
+          description: social link removed  
+  /links:  
+    get:
+      tags:
+        - Social-links
+      responses:
+        '200':
+          description: get all social links info successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string                             
