@@ -1,6 +1,6 @@
 import express from 'express'
 import { SocialLink } from 'models'
-import { addLinkSchema } from 'schemas'
+import { addLinkSchema, getLinkSchema } from 'schemas'
 
 const addNewLink = async(req: express.Request, res: express.Response) => {
     const { body } = req
@@ -25,4 +25,21 @@ const addNewLink = async(req: express.Request, res: express.Response) => {
     return res.status(200).json({ message: 'Add new social link successfully' })
 }
 
-export default { addNewLink }
+const getSocialLink = async(req: express.Request, res: express.Response) => {
+    const paramId = +req.params.id
+
+    const validator = await getLinkSchema({id: paramId})
+    const { value: data, error } = validator.validate({ id: paramId})
+
+    if(error){
+        return res.status(422).json(error.details)
+    }
+
+    const { id } = data
+    const link = await SocialLink.findOne({ id })
+
+    return res.json(link)
+
+}
+
+export default { addNewLink, getSocialLink }
