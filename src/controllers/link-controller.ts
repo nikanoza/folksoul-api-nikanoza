@@ -60,4 +60,20 @@ const updateSocialLink = async(req: express.Request, res: express.Response) => {
     return res.status(200).json({ message: 'social link update successfully' })
 }
 
-export default { addNewLink, getSocialLink, updateSocialLink }
+const deleteSocialLink = async(req: express.Request, res: express.Response) => {
+    const paramId = + req.params.id
+
+    const validator = await getLinkSchema({id: paramId})
+    const {value: data, error} = validator.validate({id: paramId})
+
+    if(error){
+        return res.status(422).json(error.details)
+    }
+
+    const { id } = data
+    await SocialLink.findOneAndRemove({ id })
+
+    return res.status(200).send()
+}
+
+export default { addNewLink, getSocialLink, updateSocialLink, deleteSocialLink }
