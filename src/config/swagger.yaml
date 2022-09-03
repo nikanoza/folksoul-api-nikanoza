@@ -45,7 +45,7 @@ paths:
         - Members
       responses:
         '200':
-          description: Successfully fetched
+          description: get all singers info successfully
           content:
             application/json:
               schema:
@@ -65,7 +65,7 @@ paths:
         - Members            
       responses:
         '200':
-          description: singer added
+          description: get singer info successfully
           content:
             application/json:
               schema:
@@ -174,4 +174,22 @@ paths:
               link: https://www.formula1.com
       responses:
         '200':
-          description: new social link added               
+          description: new social link added  
+  /links/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+          required: true
+      tags:
+        - Social-links           
+      responses:
+        '200':
+          description: get social link info successfully
+          content:
+            application/json:
+              schema:
+                type: "object"                     
