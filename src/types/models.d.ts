@@ -1,7 +1,6 @@
 export interface IBand {
-    logo: File,
+    logo: string,
     description: string,
-    extra: string,
 }
 
 export interface ISinger {

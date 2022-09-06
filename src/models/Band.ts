@@ -5,14 +5,10 @@ const { Schema } = mongoose
 
 const bandSchema = new Schema<IBand>({
     logo: {
-        type: Schema.Types.Buffer,
-        required: true
-    },
-    description: {
         type: Schema.Types.String,
         required: true
     },
-    extra: {
+    description: {
         type: Schema.Types.String,
         required: true
     }
