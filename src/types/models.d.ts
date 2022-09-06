@@ -16,6 +16,7 @@ export interface ISinger {
 export interface ISocialLink {
     name: string,
     link: string,
+    id: number,
 }
 
 export interface IUser {

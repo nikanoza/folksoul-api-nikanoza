@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
 
 import connectToMongo from '../config/mongo.js'
-import { User } from '../models/index.js'
+import { User } from 'models'
 
 dotenv.config()
 connectToMongo()

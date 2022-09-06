@@ -7,7 +7,7 @@ info:
 servers:
   - url: https://folksoul-api.nika-nozadze.redberryinternship.ge/api
     description: production server
-  - url: http://localhost:4444/api
+  - url: http://localhost:5555/api
     description: local server  
 components:
   securitySchemes:
@@ -45,7 +45,7 @@ paths:
         - Members
       responses:
         '200':
-          description: Successfully fetched
+          description: get all singers info successfully
           content:
             application/json:
               schema:
@@ -60,13 +60,16 @@ paths:
           schema:
             type: number
             example: 1
+          required: true
       tags:
         - Members            
       responses:
         '200':
+          description: get singer info successfully
           content:
             application/json:
-              schema:                                       
+              schema:
+                type: "object"
   /singer/new:
     post:
       tags:
@@ -94,8 +97,7 @@ paths:
               instrument: გიტარა
               orbitLength: 100
               color: '#4257F5'
-              biography: დავიბადე 1940 წელს
-              
+              biography: მერიტის ორდენის მფლობელი იამაიკელი მომღერალი და სიმღერების ავტორი. იგი ცნობილი გახდა ჯგუფთან Bob Marley & The Wailers (1963–1981) ერთად სკას, როკსტედისა და რეგის შესრულებით. მარლი რჩება რეგის ჟანრის ყველაზე ცნობილ შემსრულებლად და აღიარებულია იამაიკური მუსიკისა და რასტაფარის მოძრაობის ერთ-ერთ მთავარ ფიგურად.მარლის მუსიკაზე გავლენა იქონია მისი სამშობლოს სოციალურმა პრობლემებმა. აღიარებულია, რომ მუსიკოსმა მნიშვნელოვანი ნაბიჯი გადადგა ქვეყნის კულტურულ და პოლიტიკურ მოვლენებში წვლილის შეტანაში. მისი ცნობილი სიმღერებია „I Shot the Sheriff“, „No Woman, No Cry“, „Could You Be Loved“, „Stir It Up“, „Jamming“, „Redemption Song“, „One Love“ და The Wailers-სთან ერთად შექმნილი „Three Little Birds“,[2] გარდა ამისა, ცნობილია მისი სიმღერები, გამოცემული გარდაცვალების შემდეგ — „Buffalo Soldier“ და „Iron Lion Zion“. კრებული „Legend“ (1984), რომელიც მისი გარდაცვალებიდან სამი წლის შემდეგ გამოვიდა, წარმოადგენს რეგის ჟანრის ყველაზე გაყიდვად ალბომს, რომელიც აშშ-ში 10-ჯერ გახდა პლატინის (ანუ ალმასის) სტატუსის მფლობელი.[3] მსოფლიო მასშტაბით სულ გაიყიდა ალბომის 20 მილიონზე მეტი ასლი.   
       responses:
         '200':
           description: singer added
@@ -107,6 +109,7 @@ paths:
           schema:
             type: number
             example: 1
+          required: true
       tags:
         - Members
       requestBody:
@@ -115,8 +118,8 @@ paths:
         content:
           application/json:
             schema: 
-              type: object
-                properties:
+              type: "object"
+              properties:
                   name: 
                     type: string
                   instrument: 
@@ -144,8 +147,105 @@ paths:
           schema:
             type: number
             example: 1
+          required: true
       tags:
         - Members      
       responses:
         '200':
-          description: musician removed         
+          description: musician removed  
+  /links/new:
+    post:
+      tags:
+        - Social-links 
+      requestBody:
+        description: add new link
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: 'object'
+              properties:
+                  name: 
+                    type: string
+                  link: 
+                    type: string
+            example:
+              name: F1
+              link: https://www.formula1.com
+      responses:
+        '200':
+          description: new social link added  
+  /links/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+          required: true
+      tags:
+        - Social-links           
+      responses:
+        '200':
+          description: get social link info successfully
+          content:
+            application/json:
+              schema:
+                type: "object"    
+  /links/edit/{id}:       
+    put:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+          required: true
+      tags:
+        - Social-links
+      requestBody:
+        description: update social link
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: "object"
+              properties:
+                  name: 
+                    type: string
+                  link:
+                    type: string
+            example:
+              name: f1
+              link: https://www.formula1.com
+      responses:
+        '200':
+          description: social link updated    
+  /links/delete/{id}:            
+    delete:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+          required: true
+      tags:
+        - Social-links      
+      responses:
+        '200':
+          description: social link removed  
+  /links:  
+    get:
+      tags:
+        - Social-links
+      responses:
+        '200':
+          description: get all social links info successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string                             

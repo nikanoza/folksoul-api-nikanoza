@@ -13,6 +13,9 @@
         [
             "module-resolver", {
                 "root": ["./src"],
+                "alias": {
+                    "*": "./*"
+                },
                 "extensions": [".ts"]
             }
         ]

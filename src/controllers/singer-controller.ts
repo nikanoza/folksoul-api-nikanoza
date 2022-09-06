@@ -1,7 +1,7 @@
 import express from 'express'
-import { Singer } from '../models/index.js'
+import { Singer } from 'models'
 
-import { addNewSingerSchema, getSingerSchema, singerUpdateSchema } from 'schemas'
+import { addNewSingerSchema, getSingerSchema, singerUpdateSchema } from '../schemas/index.js'
 
 const addNewSinger = async (req: express.Request, res: express.Response) => {
     const { body } = req
@@ -46,7 +46,7 @@ const getSinger = async(req: express.Request, res: express.Response) => {
     const { id } = data
     const singer = await Singer.findOne({ id })
 
-    return res.json(singer)
+    return res.status(200).json(singer)
 }
 
 const deleteSinger = async(req: express.Request, res: express.Response) => {
@@ -61,7 +61,7 @@ const deleteSinger = async(req: express.Request, res: express.Response) => {
     const { id } = data
     await Singer.findOneAndRemove({ id })
 
-    return res.status(200).send()
+    return res.status(200).send({ message: 'member removed successfully' })
 }
 
 const updateSinger = async(req: express.Request, res: express.Response) => {
@@ -87,6 +87,7 @@ const updateSinger = async(req: express.Request, res: express.Response) => {
         }
     )
 
-    return res.status(200).send()
+    return res.status(200).send({ message: 'singer info updated successfully' })
 }
+
 export default { addNewSinger, getAllSinger, getSinger, deleteSinger, updateSinger }

@@ -11,6 +11,10 @@ const socialLinkSchema = new Schema<ISocialLink>({
     link: {
         type: Schema.Types.String,
         required: true
+    },
+    id: {
+        type: Schema.Types.Number,
+        required: true
     }
 })
 

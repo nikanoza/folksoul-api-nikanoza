@@ -7,7 +7,7 @@ const determineIfSingerExists = (singer: ISinger | null) => (value: number, help
       return helpers.message('მომღერალი აღნიშნული აიდით ვერ მოიძებნა')
     }
     return value
-  }
+}
 
 const getSingerSchema = async (data: {id: number}) => {
     const singer = await Singer.findOne({id: data.id})
