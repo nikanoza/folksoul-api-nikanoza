@@ -1,6 +1,6 @@
 import express from 'express'
-import { SocialLink } from 'models'
-import { addLinkSchema, getLinkSchema, updateLinkSchema } from 'schemas'
+import { SocialLink, SocialLinkLogo } from 'models'
+import { addLinkLogoSchema, addLinkSchema, getLinkSchema, updateLinkSchema } from 'schemas'
 
 const addNewLink = async(req: express.Request, res: express.Response) => {
     const { body } = req
@@ -82,4 +82,29 @@ const getAllSocialLinks = async(_: express.Request, res: express.Response) => {
     return res.status(200).json(data)
 }
 
-export default { addNewLink, getSocialLink, updateSocialLink, deleteSocialLink, getAllSocialLinks }
+const addLinkLogo = async (req: express.Request, res: express.Response) => {
+    const {body, file} = req
+    const validator = await addLinkLogoSchema({
+        ...body, 
+        image: file ? '/storage/' + file.filename : '' 
+    })
+    const { value: data, error } = validator.validate({
+        ...body, 
+        image: file ? '/storage/' + file.filename : '' 
+    })
+
+    if(error){
+        return res.status(422).json(error.details)
+    }
+
+    const { image, socialLinkId } = data
+
+    await SocialLinkLogo.create({
+        image,
+        socialLinkId
+    })
+
+    return res.status(200).json({ message: 'Add social link logo successfully' })
+}
+
+export default { addNewLink, getSocialLink, updateSocialLink, deleteSocialLink, getAllSocialLinks, addLinkLogo }

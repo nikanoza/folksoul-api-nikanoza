@@ -24,6 +24,16 @@ export interface IUser {
     password: string,
 }
 
+export interface ISingerAvatar {
+    image: string,
+    singerId: number
+}
+
+export interface ISocialLinkLogo{
+    image: string,
+    socialLinkId: number
+}
+
 
 
 
