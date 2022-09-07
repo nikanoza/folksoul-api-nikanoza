@@ -24,12 +24,12 @@ export interface IUser {
     password: string,
 }
 
-export interface ISingerAvatar {
+export interface IAvatar {
     image: string,
     singerId: number
 }
 
-export interface ISocialLinkLogo{
+export interface ILogo{
     image: string,
     socialLinkId: number
 }

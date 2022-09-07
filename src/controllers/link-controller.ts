@@ -1,5 +1,5 @@
 import express from 'express'
-import { SocialLink, SocialLinkLogo } from 'models'
+import { SocialLink, Logo } from 'models'
 import { addLinkLogoSchema, addLinkSchema, getLinkSchema, updateLinkLogoSchema, updateLinkSchema } from 'schemas'
 
 const addNewLink = async(req: express.Request, res: express.Response) => {
@@ -100,7 +100,7 @@ const addLinkLogo = async (req: express.Request, res: express.Response) => {
 
     const { image, socialLinkId } = data
 
-    await SocialLinkLogo.create({
+    await Logo.create({
         image,
         socialLinkId
     })
@@ -127,7 +127,7 @@ const updateLinkLogo = async (req: express.Request, res: express.Response) => {
 
     const { image, socialLinkId } = data
 
-    await SocialLinkLogo.findOneAndUpdate({ socialLinkId}, { image })
+    await Logo.findOneAndUpdate({ socialLinkId}, { image })
 
     return res.status(200).json({ message: 'update social link logo successfully' })
 }

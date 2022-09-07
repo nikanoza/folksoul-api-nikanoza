@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import { ISingerAvatar } from "types";
+import { IAvatar } from "types";
 
 const { Schema } = mongoose
 
-const singerAvatarSchema = new Schema<ISingerAvatar>({
+const singerAvatarSchema = new Schema<IAvatar>({
     image: {
         type: Schema.Types.String,
         required: true
@@ -14,6 +14,6 @@ const singerAvatarSchema = new Schema<ISingerAvatar>({
     }
 })
 
-const SingerAvatar = mongoose.model<ISingerAvatar>('SingerAvatar', singerAvatarSchema)
+const Avatar = mongoose.model<IAvatar>('Avatar', singerAvatarSchema)
 
-export default SingerAvatar
+export default Avatar

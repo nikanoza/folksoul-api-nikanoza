@@ -152,7 +152,32 @@ paths:
         - Members      
       responses:
         '200':
-          description: musician removed  
+          description: musician removed 
+  /singers-logos/{id}:
+    post:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+          required: true
+      tags: 
+        - Members
+      requestBody:
+        description: add avatar
+        required: true
+        content: 
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                  image:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: avatar uploaded        
   /links/new:
     post:
       tags:

@@ -1,7 +1,7 @@
 import express from 'express'
-import { Singer } from 'models'
+import { Avatar, Singer } from 'models'
 
-import { addNewSingerSchema, getSingerSchema, singerUpdateSchema } from '../schemas/index.js'
+import { addNewSingerSchema, getSingerSchema, singerUpdateSchema, addAvatarSchema } from '../schemas/index.js'
 
 const addNewSinger = async (req: express.Request, res: express.Response) => {
     const { body } = req
@@ -90,4 +90,30 @@ const updateSinger = async(req: express.Request, res: express.Response) => {
     return res.status(200).send({ message: 'singer info updated successfully' })
 }
 
-export default { addNewSinger, getAllSinger, getSinger, deleteSinger, updateSinger }
+const addAvatar = async (req: express.Request, res: express.Response) => {
+    const {file} = req
+    const paramId = +req.params.id
+    const validator = await addAvatarSchema({
+        singerId: paramId, 
+        image: file ? '/storage/' + file.filename : '' 
+    })
+    const { value: data, error } = validator.validate({
+        singerId: paramId, 
+        image: file ? '/storage/' + file.filename : '' 
+    })
+
+    if(error){
+        return res.status(422).json(error.details)
+    }
+
+    const { image, singerId } = data
+
+    await Avatar.create({
+        image,
+        singerId
+    })
+
+    return res.status(200).json({ message: 'Avatar add successfully' })
+}
+
+export default { addNewSinger, getAllSinger, getSinger, deleteSinger, updateSinger, addAvatar }

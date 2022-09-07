@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import { ISocialLinkLogo } from "types";
+import { ILogo } from "types";
 
 const { Schema } = mongoose
 
-const linkLogoSchema = new Schema<ISocialLinkLogo>({
+const linkLogoSchema = new Schema<ILogo>({
     image: {
         type: Schema.Types.String,
         required: true
@@ -14,6 +14,6 @@ const linkLogoSchema = new Schema<ISocialLinkLogo>({
     }
 })
 
-const SocialLinkLogo = mongoose.model<ISocialLinkLogo>('SocialLinkLogo', linkLogoSchema)
+const Logo = mongoose.model<ILogo>('Logo', linkLogoSchema)
 
-export default SocialLinkLogo
+export default Logo

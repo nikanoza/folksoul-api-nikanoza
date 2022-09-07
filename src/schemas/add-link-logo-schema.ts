@@ -1,8 +1,8 @@
 import Joi from "joi"
-import { SocialLink, SocialLinkLogo } from "models"
-import { ISocialLink, ISocialLinkLogo } from "types"
+import { SocialLink, Logo } from "models"
+import { ISocialLink, ILogo } from "types"
 
-const determineIfLogoExists = (logo: ISocialLinkLogo | null) => (value: number, helpers: any) => {
+const determineIfLogoExists = (logo: ILogo | null) => (value: number, helpers: any) => {
     if (logo) {
       return helpers.message('ლოგო აღნიშნული ბმულისთვის უკვე არსებობს')
     }
@@ -16,8 +16,8 @@ const determineIfLinkExists = (link: ISocialLink | null) => (value: number, help
     return value
 }
 
-const addLinkLogoSchema = async (data: ISocialLinkLogo) => {
-    const logo = await SocialLinkLogo.findOne({socialLinkId: data.socialLinkId})
+const addLinkLogoSchema = async (data: ILogo) => {
+    const logo = await Logo.findOne({socialLinkId: data.socialLinkId})
     const link = await SocialLink.findOne({id: data.socialLinkId})
     return Joi.object({
         image: Joi.string()
@@ -31,8 +31,8 @@ const addLinkLogoSchema = async (data: ISocialLinkLogo) => {
         .custom(determineIfLogoExists(logo))
         .custom(determineIfLinkExists(link))
         .messages({
-            'number.base': 'ბმულის უნდა იყოს ტექსტური',
-            'number.required': 'ბმულის ველი არ უნდა იყოს ცარიელი'
+            'number.base': 'აიდი უნდა იყოს ციფრი',
+            'number.required': 'აიდის ველი არ უნდა იყოს ცარიელი'
         }),
     })
 }
