@@ -1,6 +1,7 @@
 export interface IBand {
     logo: string,
     description: string,
+    name: string,
 }
 
 export interface ISinger {

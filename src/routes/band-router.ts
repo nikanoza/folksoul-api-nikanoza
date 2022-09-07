@@ -5,7 +5,7 @@ import express from 'express'
 import { DestinationCallback, FileNameCallback } from 'types'
 
 const bandRouter = express.Router()
-const { createBand } = bandController
+const { createBand, editBand } = bandController
 
 const fileStorage = multer.diskStorage({
     destination: (
@@ -41,5 +41,6 @@ const fileFilter = (
 }
 
 bandRouter.post('/band', multer({storage: fileStorage, fileFilter: fileFilter}).single('logo'), createBand)
+bandRouter.put('/band/edit', multer({storage: fileStorage, fileFilter: fileFilter}).single('logo'), editBand)
 
 export default bandRouter 

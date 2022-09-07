@@ -24,6 +24,4 @@ app.use('/api', cors(), linksRouter)
 app.use('/', ...swaggerMiddleware)
 
 const server = http.createServer(app)
-server.listen(process.env.SERVER_PORT, () => {
-    console.log(path.join(__dirname, 'storage'))
-})
+server.listen(process.env.SERVER_PORT)

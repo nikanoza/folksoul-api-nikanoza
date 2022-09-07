@@ -263,9 +263,33 @@ paths:
               properties:
                   description: 
                     type: string
+                  name: 
+                    type: string  
                   logo:
                     type: string
                     format: binary
       responses:
         '200':
           description: band created 
+  /band/edit:
+    put:
+      tags: 
+        - Band
+      requestBody:
+        description: update band
+        required: true
+        content: 
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                  description: 
+                    type: string
+                  name: 
+                    type: string  
+                  logo:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: band updated 

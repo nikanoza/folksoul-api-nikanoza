@@ -11,6 +11,10 @@ const bandSchema = new Schema<IBand>({
     description: {
         type: Schema.Types.String,
         required: true
+    },
+    name: {
+        type: Schema.Types.String,
+        required: true
     }
 })
 
