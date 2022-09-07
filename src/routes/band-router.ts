@@ -13,15 +13,14 @@ const fileStorage = multer.diskStorage({
         file: Express.Multer.File,
         callback: DestinationCallback
     ): void => {
-        callback(null, '/storage/band')
+        callback(null, 'src/storage')
     },
-
     filename: (
         req: express.Request, 
         file: Express.Multer.File, 
         callback: FileNameCallback
     ): void => {
-        callback(null, file.filename)
+        callback(null, new Date().toISOString() + file.originalname)
     }
 })
 
