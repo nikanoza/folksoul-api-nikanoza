@@ -393,6 +393,24 @@ paths:
       responses:
         '200':
           description: band created 
+  /band/{name}:
+    get:
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+            example: folksoul
+          required: true
+      tags:
+        - Band           
+      responses:
+        '200':
+          description: get band info successfully
+          content:
+            application/json:
+              schema:
+                type: "object"         
   /band/edit:
     put:
       tags: 

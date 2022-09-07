@@ -6,7 +6,7 @@ import { DestinationCallback, FileNameCallback } from 'types'
 import { authMiddleware } from 'middlewares'
 
 const bandRouter = express.Router()
-const { createBand, editBand } = bandController
+const { createBand, editBand, getBand } = bandController
 
 const fileStorage = multer.diskStorage({
     destination: (
@@ -42,6 +42,7 @@ const fileFilter = (
 }
 
 bandRouter.post('/band', authMiddleware, multer({storage: fileStorage, fileFilter: fileFilter}).single('logo'), createBand)
+bandRouter.get('/band/:name', getBand)
 bandRouter.put('/band/edit', authMiddleware, multer({storage: fileStorage, fileFilter: fileFilter}).single('logo'), editBand)
 
 export default bandRouter 

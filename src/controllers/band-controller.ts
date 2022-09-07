@@ -1,6 +1,6 @@
 import express from 'express'
 import { Band } from 'models'
-import { addBandSchema, updateBandSchema } from 'schemas'
+import { addBandSchema, getBandSchema, updateBandSchema } from 'schemas'
 
 const createBand = async (req: express.Request, res: express.Response) => {
     const {body, file} = req
@@ -53,4 +53,23 @@ const editBand = async (req: express.Request, res: express.Response) => {
     return res.status(200).json({ message: 'Band update successfully' })
 }
 
-export default { createBand, editBand }
+const getBand = async (req: express.Request, res: express.Response) => {
+    const paramName = req.params.name
+
+    const validator = await getBandSchema({ name: paramName })
+
+    const { value: data, error } = validator.validate({ name: paramName })
+
+    if(error){
+        return res.status(422).json(error.details)
+    }
+
+    const { name } = data
+
+    const band = await Band.findOne({ name})
+
+    return res.status(200).json(band)
+
+}
+
+export default { createBand, editBand, getBand }
