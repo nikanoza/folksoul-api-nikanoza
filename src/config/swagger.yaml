@@ -174,27 +174,7 @@ paths:
               link: https://www.formula1.com
       responses:
         '200':
-          description: new social link added 
-  /links/logo:
-    post:
-      tags: 
-        - Social-links
-      requestBody:
-        description: add social link logo
-        required: true
-        content: 
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                  socialLinkId:
-                    type: number
-                  image:
-                    type: string
-                    format: binary
-      responses:
-        '200':
-          description: social link logo uploaded               
+          description: new social link added                
   /links/{id}:
     get:
       parameters:
@@ -269,6 +249,56 @@ paths:
                 type: array
                 items:
                   type: string 
+  /links-logos/{id}:
+    post:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+          required: true
+      tags: 
+        - Social-links
+      requestBody:
+        description: add social link logo
+        required: true
+        content: 
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                  image:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: social link logo uploaded
+  /links-logos/edit/{id}:
+    put:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+          required: true
+      tags: 
+        - Social-links
+      requestBody:
+        description: update social link logo
+        required: true
+        content: 
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                  image:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: social link logo updated                        
   /band:
     post:
       tags: 

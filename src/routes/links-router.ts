@@ -5,7 +5,15 @@ import { DestinationCallback, FileNameCallback } from 'types'
 import { LinksController } from 'controllers'
 
 const linksRouter = express.Router()
-const { addNewLink, getSocialLink, updateSocialLink, deleteSocialLink, getAllSocialLinks, addLinkLogo } = LinksController
+const { 
+    addNewLink, 
+    getSocialLink, 
+    updateSocialLink, 
+    deleteSocialLink, 
+    getAllSocialLinks, 
+    addLinkLogo,
+    updateLinkLogo 
+} = LinksController
 
 const fileStorage = multer.diskStorage({
     destination: (
@@ -45,6 +53,7 @@ linksRouter.post('/links/new', addNewLink)
 linksRouter.get('/links/:id', getSocialLink)
 linksRouter.put('/links/edit/:id', updateSocialLink)
 linksRouter.delete('/links/delete/:id', deleteSocialLink)
-linksRouter.post('/links/logo', multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), addLinkLogo)
+linksRouter.post('/links-logos/:id', multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), addLinkLogo)
+linksRouter.put('/links-logos/edit/:id', multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), updateLinkLogo)
 
 export default linksRouter

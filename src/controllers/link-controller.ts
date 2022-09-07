@@ -1,6 +1,6 @@
 import express from 'express'
 import { SocialLink, SocialLinkLogo } from 'models'
-import { addLinkLogoSchema, addLinkSchema, getLinkSchema, updateLinkSchema } from 'schemas'
+import { addLinkLogoSchema, addLinkSchema, getLinkSchema, updateLinkLogoSchema, updateLinkSchema } from 'schemas'
 
 const addNewLink = async(req: express.Request, res: express.Response) => {
     const { body } = req
@@ -83,13 +83,14 @@ const getAllSocialLinks = async(_: express.Request, res: express.Response) => {
 }
 
 const addLinkLogo = async (req: express.Request, res: express.Response) => {
-    const {body, file} = req
+    const {file} = req
+    const paramId = +req.params.id
     const validator = await addLinkLogoSchema({
-        ...body, 
+        socialLinkId: paramId, 
         image: file ? '/storage/' + file.filename : '' 
     })
     const { value: data, error } = validator.validate({
-        ...body, 
+        socialLinkId: paramId, 
         image: file ? '/storage/' + file.filename : '' 
     })
 
@@ -107,4 +108,28 @@ const addLinkLogo = async (req: express.Request, res: express.Response) => {
     return res.status(200).json({ message: 'Add social link logo successfully' })
 }
 
-export default { addNewLink, getSocialLink, updateSocialLink, deleteSocialLink, getAllSocialLinks, addLinkLogo }
+const updateLinkLogo = async (req: express.Request, res: express.Response) => {
+    const {file} = req
+    const paramId = +req.params.id
+    const validator = await updateLinkLogoSchema({
+        socialLinkId: paramId, 
+        image: file ? '/storage/' + file.filename : '' 
+    })
+
+    const { value:data, error } = validator.validate({
+        socialLinkId: paramId, 
+        image: file ? '/storage/' + file.filename : '' 
+    })
+
+    if(error){
+        return res.status(422).json(error.details)
+    }
+
+    const { image, socialLinkId } = data
+
+    await SocialLinkLogo.findOneAndUpdate({ socialLinkId}, { image })
+
+    return res.status(200).json({ message: 'update social link logo successfully' })
+}
+
+export default { addNewLink, getSocialLink, updateSocialLink, deleteSocialLink, getAllSocialLinks, addLinkLogo, updateLinkLogo }
