@@ -11,7 +11,8 @@ const {
     getSinger, 
     deleteSinger, 
     updateSinger,
-    addAvatar 
+    addAvatar,
+    updateAvatar
 } = singerController
 
 const fileStorage = multer.diskStorage({
@@ -53,5 +54,6 @@ singerRouter.get('/singers/:id', getSinger)
 singerRouter.delete('/singers/delete/:id', deleteSinger);
 singerRouter.put('/singers/edit/:id', updateSinger);
 singerRouter.post('/singers-logos/:id', multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), addAvatar)
+singerRouter.put('/singers-logos/edit/:id', multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), updateAvatar)
 
 export default singerRouter 

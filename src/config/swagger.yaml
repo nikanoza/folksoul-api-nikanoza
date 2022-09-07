@@ -177,7 +177,32 @@ paths:
                     format: binary
       responses:
         '200':
-          description: avatar uploaded        
+          description: avatar uploaded 
+  /singers-logos/edit/{id}:
+    put:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+            example: 1
+          required: true
+      tags: 
+        - Members
+      requestBody:
+        description: update avatar
+        required: true
+        content: 
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                  image:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: avatar update              
   /links/new:
     post:
       tags:

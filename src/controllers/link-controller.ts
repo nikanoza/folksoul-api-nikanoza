@@ -72,6 +72,7 @@ const deleteSocialLink = async(req: express.Request, res: express.Response) => {
 
     const { id } = data
     await SocialLink.findOneAndRemove({ id })
+    await Logo.findOneAndRemove({ socialLinkId: id })
 
     return res.status(200).send({ message: 'social link removed successfully' })
 }
