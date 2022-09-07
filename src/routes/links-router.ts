@@ -3,6 +3,7 @@ import multer, { FileFilterCallback } from 'multer'
 import express from 'express'
 import { DestinationCallback, FileNameCallback } from 'types'
 import { LinksController } from 'controllers'
+import { authMiddleware } from 'middlewares'
 
 const linksRouter = express.Router()
 const { 
@@ -49,11 +50,11 @@ const fileFilter = (
 }
 
 linksRouter.get('/links', getAllSocialLinks)
-linksRouter.post('/links/new', addNewLink)
+linksRouter.post('/links/new', authMiddleware, addNewLink)
 linksRouter.get('/links/:id', getSocialLink)
-linksRouter.put('/links/edit/:id', updateSocialLink)
-linksRouter.delete('/links/delete/:id', deleteSocialLink)
-linksRouter.post('/links-logos/:id', multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), addLinkLogo)
-linksRouter.put('/links-logos/edit/:id', multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), updateLinkLogo)
+linksRouter.put('/links/edit/:id', authMiddleware, updateSocialLink)
+linksRouter.delete('/links/delete/:id', authMiddleware, deleteSocialLink)
+linksRouter.post('/links-logos/:id',authMiddleware, multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), addLinkLogo)
+linksRouter.put('/links-logos/edit/:id',authMiddleware, multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), updateLinkLogo)
 
 export default linksRouter

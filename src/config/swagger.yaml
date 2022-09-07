@@ -74,6 +74,8 @@ paths:
     post:
       tags:
         - Members 
+      security:
+        - bearerAuth: []  
       requestBody:
         description: add new musician
         required: true
@@ -97,7 +99,7 @@ paths:
               instrument: გიტარა
               orbitLength: 100
               color: '#4257F5'
-              biography: მერიტის ორდენის მფლობელი იამაიკელი მომღერალი და სიმღერების ავტორი. იგი ცნობილი გახდა ჯგუფთან (1963–1981) ერთად სკას, როკსტედისა და რეგის შესრულებით. მარლი რჩება რეგის ჟანრის ყველაზე ცნობილ შემსრულებლად და აღიარებულია იამაიკური მუსიკისა და რასტაფარის მოძრაობის ერთ-ერთ მთავარ ფიგურად.მარლის მუსიკაზე გავლენა იქონია მისი სამშობლოს სოციალურმა პრობლემებმა. აღიარებულია, რომ მუსიკოსმა მნიშვნელოვანი ნაბიჯი გადადგა ქვეყნის კულტურულ და პოლიტიკურ მოვლენებში წვლილის შეტანაში. მისი ცნობილი სიმღერებია და სთან ერთად შექმნილი გარდა ამისა, ცნობილია მისი სიმღერები, გამოცემული გარდაცვალების შემდეგ — „Buffalo Soldier“ და „Iron Lion Zion“. კრებული (1984), რომელიც მისი გარდაცვალებიდან სამი წლის შემდეგ გამოვიდა, წარმოადგენს რეგის ჟანრის ყველაზე გაყიდვად ალბომს, რომელიც აშშ-ში 10-ჯერ გახდა პლატინის (ანუ ალმასის) სტატუსის მფლობელი.[3] მსოფლიო მასშტაბით სულ გაიყიდა ალბომის 20 მილიონზე მეტი ასლი.   
+              biography: მერიტის ორდენის მფლობელი იამაიკელი მომღერალი და სიმღერების ავტორი. იგი ცნობილი გახდა ჯგუფთან (1963–1981) ერთად სკას, როკსტედისა და რეგის შესრულებით. მარლი რჩება რეგის ჟანრის ყველაზე ცნობილ შემსრულებლად და აღიარებულია იამაიკური მუსიკისა და რასტაფარის მოძრაობის ერთ-ერთ მთავარ ფიგურად.მარლის მუსიკაზე გავლენა იქონია მისი სამშობლოს სოციალურმა პრობლემებმა. აღიარებულია, რომ მუსიკოსმა მნიშვნელოვანი ნაბიჯი გადადგა ქვეყნის კულტურულ და პოლიტიკურ მოვლენებში წვლილის შეტანაში. მისი ცნობილი სიმღერებია და სთან ერთად შექმნილი გარდა ამისა, ცნობილია მისი სიმღერები, გამოცემული გარდაცვალების შემდეგ — . კრებული (1984), რომელიც მისი გარდაცვალებიდან სამი წლის შემდეგ გამოვიდა, წარმოადგენს რეგის ჟანრის ყველაზე გაყიდვად ალბომს, რომელიც აშშ-ში 10-ჯერ გახდა პლატინის (ანუ ალმასის) სტატუსის მფლობელი.[3] მსოფლიო მასშტაბით სულ გაიყიდა ალბომის 20 მილიონზე მეტი ასლი.   
       responses:
         '200':
           description: singer added
@@ -112,6 +114,8 @@ paths:
           required: true
       tags:
         - Members
+      security:
+        - bearerAuth: []    
       requestBody:
         description: update singer
         required: true
@@ -149,7 +153,9 @@ paths:
             example: 1
           required: true
       tags:
-        - Members      
+        - Members
+      security:
+        - bearerAuth: []          
       responses:
         '200':
           description: musician removed 
@@ -164,6 +170,8 @@ paths:
           required: true
       tags: 
         - Members
+      security:
+        - bearerAuth: []  
       requestBody:
         description: add avatar
         required: true
@@ -189,6 +197,8 @@ paths:
           required: true
       tags: 
         - Members
+      security:
+        - bearerAuth: []  
       requestBody:
         description: update avatar
         required: true
@@ -207,6 +217,8 @@ paths:
     post:
       tags:
         - Social-links 
+      security:
+        - bearerAuth: []  
       requestBody:
         description: add new link
         required: true
@@ -254,6 +266,8 @@ paths:
           required: true
       tags:
         - Social-links
+      security:
+        - bearerAuth: []
       requestBody:
         description: update social link
         required: true
@@ -282,7 +296,9 @@ paths:
             example: 1
           required: true
       tags:
-        - Social-links      
+        - Social-links
+      security:
+        - bearerAuth: []      
       responses:
         '200':
           description: social link removed  
@@ -310,6 +326,8 @@ paths:
           required: true
       tags: 
         - Social-links
+      security:
+        - bearerAuth: []
       requestBody:
         description: add social link logo
         required: true
@@ -335,6 +353,8 @@ paths:
           required: true
       tags: 
         - Social-links
+      security:
+        - bearerAuth: [] 
       requestBody:
         description: update social link logo
         required: true
@@ -353,6 +373,8 @@ paths:
     post:
       tags: 
         - Band
+      security:
+        - bearerAuth: []  
       requestBody:
         description: create band
         required: true
@@ -375,6 +397,8 @@ paths:
     put:
       tags: 
         - Band
+      security:
+        - bearerAuth: []
       requestBody:
         description: update band
         required: true

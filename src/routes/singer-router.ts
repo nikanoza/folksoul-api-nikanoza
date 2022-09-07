@@ -3,6 +3,7 @@ import multer, { FileFilterCallback } from 'multer'
 import express from 'express'
 import { DestinationCallback, FileNameCallback } from 'types'
 import { singerController } from 'controllers'
+import { authMiddleware } from 'middlewares'
 
 const singerRouter = express.Router()
 const { 
@@ -48,12 +49,12 @@ const fileFilter = (
     }
 }
 
-singerRouter.post('/singer/new', addNewSinger)
+singerRouter.post('/singer/new', authMiddleware, addNewSinger)
 singerRouter.get('/singers', getAllSinger)
 singerRouter.get('/singers/:id', getSinger)
-singerRouter.delete('/singers/delete/:id', deleteSinger);
-singerRouter.put('/singers/edit/:id', updateSinger);
-singerRouter.post('/singers-logos/:id', multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), addAvatar)
-singerRouter.put('/singers-logos/edit/:id', multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), updateAvatar)
+singerRouter.delete('/singers/delete/:id', authMiddleware,  deleteSinger);
+singerRouter.put('/singers/edit/:id', authMiddleware, updateSinger);
+singerRouter.post('/singers-logos/:id', authMiddleware, multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), addAvatar)
+singerRouter.put('/singers-logos/edit/:id', authMiddleware, multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), updateAvatar)
 
 export default singerRouter 

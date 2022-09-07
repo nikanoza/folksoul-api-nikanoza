@@ -37,8 +37,16 @@ const getSocialLink = async(req: express.Request, res: express.Response) => {
 
     const { id } = data
     const link = await SocialLink.findOne({ id })
+    const logo = await Logo.findOne({ socialLinkId: id})
 
-    return res.json(link)
+    const linkData = {
+        name: link?.name,
+        link: link?.link,
+        id: link?.id,
+        image: logo ? logo.image : null
+    }
+
+    return res.json(linkData)
 
 }
 
@@ -78,7 +86,18 @@ const deleteSocialLink = async(req: express.Request, res: express.Response) => {
 }
 
 const getAllSocialLinks = async(_: express.Request, res: express.Response) => {
-    const data = await SocialLink.find()
+    const links = await SocialLink.find()
+    const logos = await Logo.find()
+
+    const data = links.map(link => {
+        const logo = logos.find(logo => logo.socialLinkId === link.id);
+        return {
+            name: link.name,
+            link: link.link,
+            id: link.id,
+            logo: logo ? logo.image : null
+        }
+    })
 
     return res.status(200).json(data)
 }

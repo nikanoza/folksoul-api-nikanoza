@@ -3,6 +3,7 @@ import multer, { FileFilterCallback } from 'multer'
 
 import express from 'express'
 import { DestinationCallback, FileNameCallback } from 'types'
+import { authMiddleware } from 'middlewares'
 
 const bandRouter = express.Router()
 const { createBand, editBand } = bandController
@@ -40,7 +41,7 @@ const fileFilter = (
     }
 }
 
-bandRouter.post('/band', multer({storage: fileStorage, fileFilter: fileFilter}).single('logo'), createBand)
-bandRouter.put('/band/edit', multer({storage: fileStorage, fileFilter: fileFilter}).single('logo'), editBand)
+bandRouter.post('/band', authMiddleware, multer({storage: fileStorage, fileFilter: fileFilter}).single('logo'), createBand)
+bandRouter.put('/band/edit', authMiddleware, multer({storage: fileStorage, fileFilter: fileFilter}).single('logo'), editBand)
 
 export default bandRouter 

@@ -30,7 +30,22 @@ const addNewSinger = async (req: express.Request, res: express.Response) => {
 }
 
 const getAllSinger = async (_: express.Request, res: express.Response) => {
-    const data = await Singer.find();
+    const singers = await Singer.find();
+    const avatars = await Avatar.find();
+
+    const data = singers.map(singer => {
+        const avatar = avatars.find(avatar => avatar.singerId === singer.id);
+        return {
+            name: singer.name,
+            instrument: singer.instrument,
+            orbitLength: singer.orbitLength,
+            color: singer.color,
+            biography: singer.biography,
+            id: singer.id,
+            avatar: avatar ? avatar.image : null
+        }
+    })
+
     return res.json(data);
 }
 
@@ -45,8 +60,19 @@ const getSinger = async(req: express.Request, res: express.Response) => {
 
     const { id } = data
     const singer = await Singer.findOne({ id })
+    const avatar = await Avatar.findOne({ singerId: id})
 
-    return res.status(200).json(singer)
+    const singerData = {
+        name: singer?.name,
+        instrument: singer?.instrument,
+        orbitLength: singer?.orbitLength,
+        color: singer?.color,
+        biography: singer?.biography,
+        id: singer?.id,
+        avatar: avatar ? avatar.image : null
+    }
+
+    return res.status(200).json(singerData)
 }
 
 const deleteSinger = async(req: express.Request, res: express.Response) => {
