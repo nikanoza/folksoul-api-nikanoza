@@ -5,7 +5,7 @@ import { addNewSingerSchema, getSingerSchema, singerUpdateSchema, addAvatarSchem
 
 const addNewSinger = async (req: express.Request, res: express.Response) => {
     const { body } = req
-    const validator = addNewSingerSchema()
+    const validator = await addNewSingerSchema({name: body.name})
     
     const {value: data, error} = validator.validate(body)
 

@@ -1,10 +1,21 @@
 import Joi from "joi";
+import { Singer } from "models";
+import { ISinger } from "types";
 
-const addNewSingerSchema = () => {
+const determineIfSingerExists = (singer: ISinger | null) => (value: string, helpers: any) => {
+    if (singer) {
+      return helpers.message('მუსიკოსი ამ მეტსახელით უკვე არსებობს')
+    }
+    return value
+}
+
+const addNewSingerSchema = async (data: { name: string; }) => {
+    const singer = await Singer.findOne({ name: data.name})
     return Joi.object({
         name: Joi.string()
         .min(3)
         .pattern(/^[ა-ჰ]{3,}$/)
+        .custom(determineIfSingerExists(singer))
         .required()
         .messages({
             'string.base': 'სახელის ტიპი უნდა იყოს ტექსტური',
@@ -41,7 +52,7 @@ const addNewSingerSchema = () => {
         .required()
         .messages({
             'string.base': 'ბიოგრაფია უნდა იყოს ტექსტური',
-            'string.pattern': 'ბიოგრაფია უნდა შეიჩავდეს მხოლოდ ქართულ ასოებს',
+            'string.pattern': 'ბიოგრაფია უნდა შეიცავდეს მხოლოდ ქართულ ასოებს',
             'string.required': 'ბიოგრაფია არ უნდა იყოს ცარიელი'
         }),
     })
