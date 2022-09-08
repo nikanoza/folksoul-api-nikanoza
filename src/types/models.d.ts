@@ -1,7 +1,7 @@
 export interface IBand {
-    logo: File,
+    logo: string,
     description: string,
-    extra: string,
+    name: string,
 }
 
 export interface ISinger {
@@ -22,6 +22,16 @@ export interface ISocialLink {
 export interface IUser {
     name: string,
     password: string,
+}
+
+export interface IAvatar {
+    image: string,
+    singerId: number
+}
+
+export interface ILogo{
+    image: string,
+    socialLinkId: number
 }
 
 

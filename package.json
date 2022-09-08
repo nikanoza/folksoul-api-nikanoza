@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node build/server.js",
-    "create:user": "node build/src/scripts/create-user.js",
+    "create:user": "node build/scripts/create-user.js",
     "build:watch": "babel src --out-dir build --extensions .ts --copy-files --watch",
     "build:prod": "babel src --out-dir build --extensions .ts --copy-files --minified"
   },

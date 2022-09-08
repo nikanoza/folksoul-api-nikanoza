@@ -1,6 +1,6 @@
 import express from 'express'
-import { SocialLink } from 'models'
-import { addLinkSchema, getLinkSchema, updateLinkSchema } from 'schemas'
+import { SocialLink, Logo } from 'models'
+import { addLinkLogoSchema, addLinkSchema, getLinkSchema, updateLinkLogoSchema, updateLinkSchema } from 'schemas'
 
 const addNewLink = async(req: express.Request, res: express.Response) => {
     const { body } = req
@@ -37,8 +37,16 @@ const getSocialLink = async(req: express.Request, res: express.Response) => {
 
     const { id } = data
     const link = await SocialLink.findOne({ id })
+    const logo = await Logo.findOne({ socialLinkId: id})
 
-    return res.json(link)
+    const linkData = {
+        name: link?.name,
+        link: link?.link,
+        id: link?.id,
+        image: logo ? logo.image : null
+    }
+
+    return res.json(linkData)
 
 }
 
@@ -72,14 +80,76 @@ const deleteSocialLink = async(req: express.Request, res: express.Response) => {
 
     const { id } = data
     await SocialLink.findOneAndRemove({ id })
+    await Logo.findOneAndRemove({ socialLinkId: id })
 
     return res.status(200).send({ message: 'social link removed successfully' })
 }
 
 const getAllSocialLinks = async(_: express.Request, res: express.Response) => {
-    const data = await SocialLink.find()
+    const links = await SocialLink.find()
+    const logos = await Logo.find()
+
+    const data = links.map(link => {
+        const logo = logos.find(logo => logo.socialLinkId === link.id);
+        return {
+            name: link.name,
+            link: link.link,
+            id: link.id,
+            logo: logo ? logo.image : null
+        }
+    })
 
     return res.status(200).json(data)
 }
 
-export default { addNewLink, getSocialLink, updateSocialLink, deleteSocialLink, getAllSocialLinks }
+const addLinkLogo = async (req: express.Request, res: express.Response) => {
+    const {file} = req
+    const paramId = +req.params.id
+    const validator = await addLinkLogoSchema({
+        socialLinkId: paramId, 
+        image: file ? '/storage/' + file.filename : '' 
+    })
+    const { value: data, error } = validator.validate({
+        socialLinkId: paramId, 
+        image: file ? '/storage/' + file.filename : '' 
+    })
+
+    if(error){
+        return res.status(422).json(error.details)
+    }
+
+    const { image, socialLinkId } = data
+
+    await Logo.create({
+        image,
+        socialLinkId
+    })
+
+    return res.status(200).json({ message: 'Add social link logo successfully' })
+}
+
+const updateLinkLogo = async (req: express.Request, res: express.Response) => {
+    const {file} = req
+    const paramId = +req.params.id
+    const validator = await updateLinkLogoSchema({
+        socialLinkId: paramId, 
+        image: file ? '/storage/' + file.filename : '' 
+    })
+
+    const { value:data, error } = validator.validate({
+        socialLinkId: paramId, 
+        image: file ? '/storage/' + file.filename : '' 
+    })
+
+    if(error){
+        return res.status(422).json(error.details)
+    }
+
+    const { image, socialLinkId } = data
+
+    await Logo.findOneAndUpdate({ socialLinkId}, { image })
+
+    return res.status(200).json({ message: 'update social link logo successfully' })
+}
+
+export default { addNewLink, getSocialLink, updateSocialLink, deleteSocialLink, getAllSocialLinks, addLinkLogo, updateLinkLogo }
