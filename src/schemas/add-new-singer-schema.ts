@@ -35,9 +35,13 @@ const addNewSingerSchema = async (data: { name: string; }) => {
         }),
         orbitLength: Joi.number()
         .required()
+        .min(201)
+        .max(800)
         .messages({
-            'string.base': 'ორბიტის სიგრძე უნდა იყოს რიცხვი',
-            'string.required': 'ორბიტის სიგრძის ველი არ უნდა იყოს ცარიელი'
+            'number.base': 'ორბიტის სიგრძე უნდა იყოს რიცხვი',
+            'number.min': 'ორბირის სიგრძე უნდა იყოს 200ზე მეტი',
+            'number.max': 'ორბიტის სიგრძე უნდა იყოს 800ზე ნაკლები',
+            'number.required': 'ორბიტის სიგრძის ველი არ უნდა იყოს ცარიელი'
         }),
         color: Joi.string()
         .pattern(/^#[0-9A-Z]{6}$/)
