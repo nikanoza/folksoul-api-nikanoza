@@ -6,11 +6,11 @@ const createBand = async (req: express.Request, res: express.Response) => {
     const {body, file} = req
     const validator = await addBandSchema({
         ...body, 
-        logo: file ? '/storage/' + file.filename : '' 
+        logo: file ? '/storage/' + file.filename : body.logo 
     })
     const { value: data, error } = validator.validate({
         ...body, 
-        logo: file ? '/storage/' + file.filename : '' 
+        logo: file ? '/storage/' + file.filename : body.logo 
     })
 
     if(error){
