@@ -411,7 +411,7 @@ paths:
             application/json:
               schema:
                 type: "object"         
-  /band/edit:
+  /band/edit/logo:
     put:
       tags: 
         - Band
@@ -435,3 +435,31 @@ paths:
       responses:
         '200':
           description: band updated 
+  /band/edit/description:
+    put:
+      tags: 
+        - Band
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: update band
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                  description: 
+                    type: string
+                  name: 
+                    type: string  
+                  logo:
+                    type: string
+            example:
+              description: მის მეცნიერულ მიღწევათა შორის მთავარია ნაშრომი „ნატურალური ფილოსოფიის მათემატიკური საწყისები“, სადაც ის მსოფლიო მიზიდულობას აღწერს. ხოლო ნაშრომებში გადაადგილების კანონთა შესახებ მან დასაბამი მისცა მეცნიერებას კლასიკური მექანიკის შესახებ. გოტფრიდ ლაიბნიცთან ერთად მას ეკუთვნის წვლილი ინტეგრალური და დიფერენციალური აღრიცხვის განვითარებაშიც. ნიუტონი პირველი იყო ვინც ჩამოაყალიბა დედამიწისა და პლანეტების მოძრაობის მმართველ ძალთა შესახებ ბუნების კანონთა მთელი წყება და მასვე ეკუთვნის კეპლერის კანონების მათემატიკური ანალიზი, რომელშიც ის ამტკიცებს, რომ ციური სხეულები მოძრაობენ ორბიტებზე, რომლებიც წარმოადგენენ ყველა სახის კონუსურ კვეთებს (როგორიცაა ელიფსი, ჰიპერბოლა, პარაბოლა).
+              name: folksoul
+              logo: /storage/2022-09-09T09:34:29.537Z5a3473fc9c6ad0.6412312015133870046407.png
+      responses:
+        '200':
+          description: band updated   
+    

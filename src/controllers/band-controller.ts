@@ -28,7 +28,7 @@ const createBand = async (req: express.Request, res: express.Response) => {
     return res.status(200).json({ message: 'Add band successfully' })
 }
 
-const editBand = async (req: express.Request, res: express.Response) => {
+const editBandLogo = async (req: express.Request, res: express.Response) => {
     const {body, file} = req
     const validator = await updateBandSchema({
         ...body, 
@@ -38,6 +38,25 @@ const editBand = async (req: express.Request, res: express.Response) => {
         ...body, 
         logo: file ? '/storage/' + file.filename : '',
     })
+
+    if(error){
+        return res.status(422).json(error.details)
+    }
+
+    const {description, logo, name} = data
+
+    await Band.findOneAndUpdate({ name },{
+        description,
+        logo
+    })
+
+    return res.status(200).json({ message: 'Band update successfully' })
+}
+
+const editBandDescription = async (req: express.Request, res: express.Response) => {
+    const {body} = req
+    const validator = await updateBandSchema(body)
+    const { value: data, error } = validator.validate(body)
 
     if(error){
         return res.status(422).json(error.details)
@@ -72,4 +91,4 @@ const getBand = async (req: express.Request, res: express.Response) => {
 
 }
 
-export default { createBand, editBand, getBand }
+export default { createBand, editBandLogo, getBand, editBandDescription }
