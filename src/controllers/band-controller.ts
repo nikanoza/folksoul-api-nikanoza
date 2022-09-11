@@ -32,11 +32,11 @@ const editBandLogo = async (req: express.Request, res: express.Response) => {
     const {body, file} = req
     const validator = await updateBandSchema({
         ...body, 
-        logo: file ? '/storage/' + file.filename : body.logo, 
+        logo: file ? '/storage/' + file.filename : '', 
     })
     const { value: data, error } = validator.validate({
         ...body, 
-        logo: file ? '/storage/' + file.filename : body.logo,
+        logo: file ? '/storage/' + file.filename : '',
     })
 
     if(error){
