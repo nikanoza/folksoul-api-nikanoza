@@ -10,7 +10,7 @@ const determineIfBandExists = (band: IBand | null) => (value: string, helpers: a
 }
 
 const updateBandSchema = async (data: IBand) => {
-    const band = await Band.findOne({id: data.name})
+    const band = await Band.findOne({name: data.name})
     return Joi.object({
         name: Joi.string()
         .required()
