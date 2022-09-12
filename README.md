@@ -64,7 +64,7 @@ npm run create:user
 ```
 |--- src
 |   |--- config # configuration files
-|   |---|--- mongo.js # perform mongoDb connection 
+|   |---|--- mongo.ts # perform mongoDb connection 
 |   |---|--- swagger.yaml # swagger configuration file 
 |   |--- controllers # functions for routes
 |   |--- middlewares # extra helper middleware functions
@@ -74,7 +74,7 @@ npm run create:user
 |   |--- routes # project routes 
 |   |--- schemas # Joi validation schema files
 |   |--- scripts # custom npm commands files
-|   |--- server.js # main file
+|   |--- server.ts # main file
 - .eslintrc.json  # eslint config file
 - .prettierrc.json  # prettier config file
 - tsconfig.json # typescript configuration
