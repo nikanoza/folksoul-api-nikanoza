@@ -10,14 +10,14 @@ const { createBand, editBandLogo, getBand, editBandDescription } = bandControlle
 
 const fileStorage = multer.diskStorage({
     destination: (
-        request: express.Request,
-        file: Express.Multer.File,
+        _: express.Request,
+        __: Express.Multer.File,
         callback: DestinationCallback
     ): void => {
         callback(null, 'src/storage')
     },
     filename: (
-        req: express.Request, 
+        _: express.Request, 
         file: Express.Multer.File, 
         callback: FileNameCallback
     ): void => {
@@ -26,7 +26,7 @@ const fileStorage = multer.diskStorage({
 })
 
 const fileFilter = (
-    request: express.Request,
+    _: express.Request,
     file: Express.Multer.File,
     callback: FileFilterCallback
 ): void => {
