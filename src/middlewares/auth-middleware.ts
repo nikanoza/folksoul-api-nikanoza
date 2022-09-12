@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken'
 
 const authMiddleware = (req:express.Request, res:express.Response, next: NextFunction) => {
   const { authorization } = req.headers
-
   if (!authorization) {
     res.status(403).send()
   } else {
