@@ -7,8 +7,8 @@ info:
 servers:
   - url: https://folksoul-api.nika-nozadze.redberryinternship.ge/api
     description: production server
-  - url: http://localhost:8000/api
-    description: local server  
+  - url: http://localhost:5555/api
+    description: local server
 components:
   securitySchemes:
     bearerAuth:
@@ -19,27 +19,27 @@ paths:
   /login:
     post:
       tags:
-        - Auth  
+        - Auth
       requestBody:
         description: JWT bearer authorization
         required: true
         content:
           application/json:
-            schema: 
+            schema:
               type: 'object'
               properties:
-                  name: 
-                    type: string
-                  password: 
-                    type: string
+                name:
+                  type: string
+                password:
+                  type: string
             example:
               name: nikanoza
               password: dardubala
-              
+
       responses:
         '200':
           description: login successfully
-  /singers:  
+  /singers:
     get:
       tags:
         - Members
@@ -51,7 +51,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: string  
+                  type: string
   /singers/{id}:
     get:
       parameters:
@@ -62,48 +62,48 @@ paths:
             example: 1
           required: true
       tags:
-        - Members            
+        - Members
       responses:
         '200':
           description: get singer info successfully
           content:
             application/json:
               schema:
-                type: "object"
+                type: 'object'
   /singer/new:
     post:
       tags:
-        - Members 
+        - Members
       security:
-        - bearerAuth: []  
+        - bearerAuth: []
       requestBody:
         description: add new musician
         required: true
         content:
           application/json:
-            schema: 
+            schema:
               type: 'object'
               properties:
-                  name: 
-                    type: string
-                  instrument: 
-                    type: string
-                  orbitLength: 
-                    type: number
-                  color: 
-                    type: string
-                  biography: 
-                    type: string
+                name:
+                  type: string
+                instrument:
+                  type: string
+                orbitLength:
+                  type: number
+                color:
+                  type: string
+                biography:
+                  type: string
             example:
               name: სიმპსონოვიჩი
               instrument: გიტარა
               orbitLength: 100
               color: '#4257F5'
-              biography: მერიტის ორდენის მფლობელი იამაიკელი მომღერალი და სიმღერების ავტორი. იგი ცნობილი გახდა ჯგუფთან (1963–1981) ერთად სკას, როკსტედისა და რეგის შესრულებით. მარლი რჩება რეგის ჟანრის ყველაზე ცნობილ შემსრულებლად და აღიარებულია იამაიკური მუსიკისა და რასტაფარის მოძრაობის ერთ-ერთ მთავარ ფიგურად.მარლის მუსიკაზე გავლენა იქონია მისი სამშობლოს სოციალურმა პრობლემებმა. აღიარებულია, რომ მუსიკოსმა მნიშვნელოვანი ნაბიჯი გადადგა ქვეყნის კულტურულ და პოლიტიკურ მოვლენებში წვლილის შეტანაში. მისი ცნობილი სიმღერებია და სთან ერთად შექმნილი გარდა ამისა, ცნობილია მისი სიმღერები, გამოცემული გარდაცვალების შემდეგ — . კრებული (1984), რომელიც მისი გარდაცვალებიდან სამი წლის შემდეგ გამოვიდა, წარმოადგენს რეგის ჟანრის ყველაზე გაყიდვად ალბომს, რომელიც აშშ-ში 10-ჯერ გახდა პლატინის (ანუ ალმასის) სტატუსის მფლობელი.[3] მსოფლიო მასშტაბით სულ გაიყიდა ალბომის 20 მილიონზე მეტი ასლი.   
+              biography: მერიტის ორდენის მფლობელი იამაიკელი მომღერალი და სიმღერების ავტორი. იგი ცნობილი გახდა ჯგუფთან (1963–1981) ერთად სკას, როკსტედისა და რეგის შესრულებით. მარლი რჩება რეგის ჟანრის ყველაზე ცნობილ შემსრულებლად და აღიარებულია იამაიკური მუსიკისა და რასტაფარის მოძრაობის ერთ-ერთ მთავარ ფიგურად.მარლის მუსიკაზე გავლენა იქონია მისი სამშობლოს სოციალურმა პრობლემებმა. აღიარებულია, რომ მუსიკოსმა მნიშვნელოვანი ნაბიჯი გადადგა ქვეყნის კულტურულ და პოლიტიკურ მოვლენებში წვლილის შეტანაში. მისი ცნობილი სიმღერებია და სთან ერთად შექმნილი გარდა ამისა, ცნობილია მისი სიმღერები, გამოცემული გარდაცვალების შემდეგ — . კრებული (1984), რომელიც მისი გარდაცვალებიდან სამი წლის შემდეგ გამოვიდა, წარმოადგენს რეგის ჟანრის ყველაზე გაყიდვად ალბომს, რომელიც აშშ-ში 10-ჯერ გახდა პლატინის (ანუ ალმასის) სტატუსის მფლობელი.[3] მსოფლიო მასშტაბით სულ გაიყიდა ალბომის 20 მილიონზე მეტი ასლი.
       responses:
         '200':
           description: singer added
-  /singers/edit/{id}:       
+  /singers/edit/{id}:
     put:
       parameters:
         - in: path
@@ -115,35 +115,35 @@ paths:
       tags:
         - Members
       security:
-        - bearerAuth: []    
+        - bearerAuth: []
       requestBody:
         description: update singer
         required: true
         content:
           application/json:
-            schema: 
-              type: "object"
+            schema:
+              type: 'object'
               properties:
-                  name: 
-                    type: string
-                  instrument: 
-                    type: string
-                  orbitLength: 
-                    type: number
-                  color: 
-                    type: string
-                  biography: 
-                    type: string 
+                name:
+                  type: string
+                instrument:
+                  type: string
+                orbitLength:
+                  type: number
+                color:
+                  type: string
+                biography:
+                  type: string
             example:
               name: დურუ
               instrument: კლარნეტი
               orbitLength: 100
               color: '#4257F5'
-              biography: დავიბადე 1940 წელს 
+              biography: დავიბადე 1940 წელს
       responses:
         '200':
-          description: Singer updated  
-  /singers/delete/{id}:            
+          description: Singer updated
+  /singers/delete/{id}:
     delete:
       parameters:
         - in: path
@@ -155,10 +155,10 @@ paths:
       tags:
         - Members
       security:
-        - bearerAuth: []          
+        - bearerAuth: []
       responses:
         '200':
-          description: musician removed 
+          description: musician removed
   /singers-logos/{id}:
     post:
       parameters:
@@ -168,24 +168,24 @@ paths:
             type: number
             example: 1
           required: true
-      tags: 
+      tags:
         - Members
       security:
-        - bearerAuth: []  
+        - bearerAuth: []
       requestBody:
         description: add avatar
         required: true
-        content: 
+        content:
           multipart/form-data:
             schema:
               type: object
               properties:
-                  image:
-                    type: string
-                    format: binary
+                image:
+                  type: string
+                  format: binary
       responses:
         '200':
-          description: avatar uploaded 
+          description: avatar uploaded
   /singers-logos/edit/{id}:
     put:
       parameters:
@@ -195,48 +195,48 @@ paths:
             type: number
             example: 1
           required: true
-      tags: 
+      tags:
         - Members
       security:
-        - bearerAuth: []  
+        - bearerAuth: []
       requestBody:
         description: update avatar
         required: true
-        content: 
+        content:
           multipart/form-data:
             schema:
               type: object
               properties:
-                  image:
-                    type: string
-                    format: binary
+                image:
+                  type: string
+                  format: binary
       responses:
         '200':
-          description: avatar update              
+          description: avatar update
   /links/new:
     post:
       tags:
-        - Social-links 
+        - Social-links
       security:
-        - bearerAuth: []  
+        - bearerAuth: []
       requestBody:
         description: add new link
         required: true
         content:
           application/json:
-            schema: 
+            schema:
               type: 'object'
               properties:
-                  name: 
-                    type: string
-                  link: 
-                    type: string
+                name:
+                  type: string
+                link:
+                  type: string
             example:
               name: F1
               link: https://www.formula1.com
       responses:
         '200':
-          description: new social link added                
+          description: new social link added
   /links/{id}:
     get:
       parameters:
@@ -247,15 +247,15 @@ paths:
             example: 1
           required: true
       tags:
-        - Social-links           
+        - Social-links
       responses:
         '200':
           description: get social link info successfully
           content:
             application/json:
               schema:
-                type: "object"    
-  /links/edit/{id}:       
+                type: 'object'
+  /links/edit/{id}:
     put:
       parameters:
         - in: path
@@ -273,20 +273,20 @@ paths:
         required: true
         content:
           application/json:
-            schema: 
-              type: "object"
+            schema:
+              type: 'object'
               properties:
-                  name: 
-                    type: string
-                  link:
-                    type: string
+                name:
+                  type: string
+                link:
+                  type: string
             example:
               name: f1
               link: https://www.formula1.com
       responses:
         '200':
-          description: social link updated    
-  /links/delete/{id}:            
+          description: social link updated
+  /links/delete/{id}:
     delete:
       parameters:
         - in: path
@@ -298,11 +298,11 @@ paths:
       tags:
         - Social-links
       security:
-        - bearerAuth: []      
+        - bearerAuth: []
       responses:
         '200':
-          description: social link removed  
-  /links:  
+          description: social link removed
+  /links:
     get:
       tags:
         - Social-links
@@ -314,7 +314,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: string 
+                  type: string
   /links-logos/{id}:
     post:
       parameters:
@@ -324,21 +324,21 @@ paths:
             type: number
             example: 1
           required: true
-      tags: 
+      tags:
         - Social-links
       security:
         - bearerAuth: []
       requestBody:
         description: add social link logo
         required: true
-        content: 
+        content:
           multipart/form-data:
             schema:
               type: object
               properties:
-                  image:
-                    type: string
-                    format: binary
+                image:
+                  type: string
+                  format: binary
       responses:
         '200':
           description: social link logo uploaded
@@ -351,48 +351,48 @@ paths:
             type: number
             example: 1
           required: true
-      tags: 
+      tags:
         - Social-links
       security:
-        - bearerAuth: [] 
+        - bearerAuth: []
       requestBody:
         description: update social link logo
         required: true
-        content: 
+        content:
           multipart/form-data:
             schema:
               type: object
               properties:
-                  image:
-                    type: string
-                    format: binary
+                image:
+                  type: string
+                  format: binary
       responses:
         '200':
-          description: social link logo updated                        
+          description: social link logo updated
   /band:
     post:
-      tags: 
+      tags:
         - Band
       security:
-        - bearerAuth: []  
+        - bearerAuth: []
       requestBody:
         description: create band
         required: true
-        content: 
+        content:
           multipart/form-data:
             schema:
               type: object
               properties:
-                  description: 
-                    type: string
-                  name: 
-                    type: string  
-                  logo:
-                    type: string
-                    format: binary
+                description:
+                  type: string
+                name:
+                  type: string
+                logo:
+                  type: string
+                  format: binary
       responses:
         '200':
-          description: band created 
+          description: band created
   /band/{name}:
     get:
       parameters:
@@ -403,63 +403,62 @@ paths:
             example: folksoul
           required: true
       tags:
-        - Band           
+        - Band
       responses:
         '200':
           description: get band info successfully
           content:
             application/json:
               schema:
-                type: "object"         
+                type: 'object'
   /band/edit/logo:
     put:
-      tags: 
+      tags:
         - Band
       security:
         - bearerAuth: []
       requestBody:
         description: update band
         required: true
-        content: 
+        content:
           multipart/form-data:
             schema:
               type: object
               properties:
-                  description: 
-                    type: string
-                  name: 
-                    type: string  
-                  logo:
-                    type: string
-                    format: binary
+                description:
+                  type: string
+                name:
+                  type: string
+                logo:
+                  type: string
+                  format: binary
       responses:
         '200':
-          description: band updated 
+          description: band updated
   /band/edit/description:
     put:
-      tags: 
+      tags:
         - Band
       security:
         - bearerAuth: []
       requestBody:
         description: update band
         required: true
-        content: 
+        content:
           application/json:
             schema:
               type: object
               properties:
-                  description: 
-                    type: string
-                  name: 
-                    type: string  
-                  logo:
-                    type: string
+                description:
+                  type: string
+                name:
+                  type: string
+                logo:
+                  type: string
             example:
               description: მის მეცნიერულ მიღწევათა შორის მთავარია ნაშრომი „ნატურალური ფილოსოფიის მათემატიკური საწყისები“, სადაც ის მსოფლიო მიზიდულობას აღწერს. ხოლო ნაშრომებში გადაადგილების კანონთა შესახებ მან დასაბამი მისცა მეცნიერებას კლასიკური მექანიკის შესახებ. გოტფრიდ ლაიბნიცთან ერთად მას ეკუთვნის წვლილი ინტეგრალური და დიფერენციალური აღრიცხვის განვითარებაშიც. ნიუტონი პირველი იყო ვინც ჩამოაყალიბა დედამიწისა და პლანეტების მოძრაობის მმართველ ძალთა შესახებ ბუნების კანონთა მთელი წყება და მასვე ეკუთვნის კეპლერის კანონების მათემატიკური ანალიზი, რომელშიც ის ამტკიცებს, რომ ციური სხეულები მოძრაობენ ორბიტებზე, რომლებიც წარმოადგენენ ყველა სახის კონუსურ კვეთებს (როგორიცაა ელიფსი, ჰიპერბოლა, პარაბოლა).
               name: folksoul
               logo: /storage/2022-09-09T09:34:29.537Z5a3473fc9c6ad0.6412312015133870046407.png
       responses:
         '200':
-          description: band updated   
-    
+          description: band updated

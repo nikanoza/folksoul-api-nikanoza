@@ -6,55 +6,65 @@ import { singerController } from 'controllers'
 import { authMiddleware } from 'middlewares'
 
 const singerRouter = express.Router()
-const { 
-    addNewSinger, 
-    getAllSinger, 
-    getSinger, 
-    deleteSinger, 
-    updateSinger,
-    addAvatar,
-    updateAvatar
+const {
+  addNewSinger,
+  getAllSinger,
+  getSinger,
+  deleteSinger,
+  updateSinger,
+  addAvatar,
+  updateAvatar,
 } = singerController
 
 const fileStorage = multer.diskStorage({
-    destination: (
-        _: express.Request,
-        __: Express.Multer.File,
-        callback: DestinationCallback
-    ): void => {
-        callback(null, 'src/storage')
-    },
-    filename: (
-        _: express.Request, 
-        file: Express.Multer.File, 
-        callback: FileNameCallback
-    ): void => {
-        callback(null, new Date().toISOString() + file.originalname)
-    }
+  destination: (
+    _: express.Request,
+    __: Express.Multer.File,
+    callback: DestinationCallback
+  ): void => {
+    callback(null, 'src/storage')
+  },
+  filename: (
+    _: express.Request,
+    file: Express.Multer.File,
+    callback: FileNameCallback
+  ): void => {
+    callback(null, new Date().toISOString() + file.originalname)
+  },
 })
 
 const fileFilter = (
-    __: express.Request,
-    file: Express.Multer.File,
-    callback: FileFilterCallback
+  __: express.Request,
+  file: Express.Multer.File,
+  callback: FileFilterCallback
 ): void => {
-    if (
-        file.mimetype === 'image/png' ||
-        file.mimetype === 'image/jpg' ||
-        file.mimetype === 'image/jpeg'
-    ) {
-        callback(null, true)
-    } else {
-        callback(null, false)
-    }
+  if (
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg' ||
+    file.mimetype === 'image/jpeg'
+  ) {
+    callback(null, true)
+  } else {
+    callback(null, false)
+  }
 }
 
 singerRouter.post('/singer/new', authMiddleware, addNewSinger)
 singerRouter.get('/singers', getAllSinger)
 singerRouter.get('/singers/:id', getSinger)
-singerRouter.delete('/singers/delete/:id', authMiddleware,  deleteSinger);
-singerRouter.put('/singers/edit/:id', authMiddleware, updateSinger);
-singerRouter.post('/singers-logos/:id', authMiddleware, multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), addAvatar)
-singerRouter.put('/singers-logos/edit/:id', authMiddleware, multer({storage: fileStorage, fileFilter: fileFilter}).single('image'), updateAvatar)
+singerRouter.delete('/singers/delete/:id', authMiddleware, deleteSinger)
+singerRouter.put('/singers/edit/:id', authMiddleware, updateSinger)
+singerRouter.post(
+  '/singers-logos/:id',
+  authMiddleware,
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'),
+  addAvatar
+)
+singerRouter.put(
+  '/singers-logos/edit/:id',
+  authMiddleware,
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'),
+  updateAvatar
+)
 
-export default singerRouter 
+export default singerRouter

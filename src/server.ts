@@ -13,7 +13,7 @@ dotenv.config()
 connectToMongo()
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/storage', express.static('src/storage'))
 
 app.use('/api', cors(), userRouter)
@@ -23,4 +23,4 @@ app.use('/api', cors(), linksRouter)
 app.use('/', ...swaggerMiddleware)
 
 const server = http.createServer(app)
-server.listen(process.env.SERVER_PORT)
+server.listen(process.env.PORT || process.env.SERVER_PORT)
