@@ -23,4 +23,4 @@ app.use('/api', cors(), linksRouter)
 app.use('/', ...swaggerMiddleware)
 
 const server = http.createServer(app)
-server.listen(process.env.PORT || process.env.SERVER_PORT)
+server.listen(process.env.PORT || 5555)
